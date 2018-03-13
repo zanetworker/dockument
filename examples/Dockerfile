@@ -1,5 +1,4 @@
 FROM golang:alpine as builder
-MAINTAINER Jessica Frazelle <jess@linux.com>
 
 # Describe container dependencies
 LABEL api.LINKS.redis=""\
