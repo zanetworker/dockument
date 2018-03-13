@@ -17,7 +17,7 @@ import (
 //
 // In the node there are three fields, Value, Next, and Children. Value is the
 // current token's string value. Next is always the next non-child token, and
-// children contains all the children. Here's an example:
+// children contains all the children. Here's an example
 //
 // (value next (child child-next child-next-next) next-next)
 //

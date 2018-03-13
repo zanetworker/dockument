@@ -2,10 +2,9 @@ package main
 
 import (
 	"io"
-	"strconv"
 
 	"github.com/spf13/cobra"
-	"github.com/zanetworker/dockument/pkg/log"
+	"github.com/zanetworker/DOCKument/pkg/labels"
 	"github.com/zanetworker/dockument/pkg/utils"
 )
 
@@ -27,8 +26,6 @@ func newDockerCmd(out io.Writer) *cobra.Command {
 		Short: "create documentation for Dockerfiles",
 		Long:  globalUsage,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			log.Info("number of flags " + strconv.Itoa(len(args)))
-
 			return dockerCmdParams.run()
 		},
 	}
@@ -40,7 +37,7 @@ func newDockerCmd(out io.Writer) *cobra.Command {
 	return dockerCmd
 }
 
-func (n *dockerCmdParams) run() error {
-
-	return nil
+func (d *dockerCmdParams) run() error {
+	err := labels.GetLabels(d.dockerfile)
+	return err
 }
