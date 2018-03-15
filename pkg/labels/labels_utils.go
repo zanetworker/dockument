@@ -67,6 +67,7 @@ func searchFileFor(search string, n *parser.Node, labels map[string]string) map[
 			n = n.Next.Next
 		}
 	}
+
 	return labels
 }
 

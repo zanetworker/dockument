@@ -64,7 +64,7 @@ func newRootCmd(args []string) *cobra.Command {
 	out := dockumentCmd.OutOrStdout()
 
 	dockumentCmd.AddCommand(
-		newDockerCmd(out),
+		newDockerCreateCmd(out),
 		newVersionCmd(out),
 	)
 

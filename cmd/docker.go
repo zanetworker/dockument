@@ -5,40 +5,41 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/zanetworker/dockument/pkg/labels"
+	"github.com/zanetworker/dockument/pkg/log"
 	"github.com/zanetworker/dockument/pkg/utils"
 )
 
-var dockerCmdDesc = `
+var dockerCreateCmdDesc = `
 This command is used to DOCKument Dockerfiles`
 
 var defaultDockumentLocation = utils.GetDir("root")
 
-type dockerCmdParams struct {	
+type dockerCreateCmd struct {
 	dockerfile  string
 	outLocation string
 }
 
-func newDockerCmd(out io.Writer) *cobra.Command {
-	dockerCmdParams := &dockerCmdParams{}
-
+func newDockerCreateCmd(out io.Writer) *cobra.Command {
+	dockerCreateCmdParams := &dockerCreateCmd{}
 	dockerCmd := &cobra.Command{
 		Use:   "create",
 		Short: "create documentation for Dockerfiles",
-		Long:  globalUsage,
+		Long:  dockerCreateCmdDesc,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return dockerCmdParams.run()
+			return dockerCreateCmdParams.run()
 		},
 	}
 
 	f := dockerCmd.Flags()
 
-	f.StringVar(&dockerCmdParams.dockerfile, "dockerfile", "", "the path of the Dockerfile to Document")
-	f.StringVarP(&dockerCmdParams.outLocation, "out", "o", defaultDockumentLocation, "the output location of documentation")
+	f.StringVar(&dockerCreateCmdParams.dockerfile, "dockerfile", "", "the path of the Dockerfile to Document")
+	f.StringVarP(&dockerCreateCmdParams.outLocation, "out", "o", defaultDockumentLocation, "the output location of documentation")
 
 	return dockerCmd
 }
 
-func (d *dockerCmdParams) run() error {
-	err := labels.GetLabels(d.dockerfile)
+func (d *dockerCreateCmd) run() error {
+	jsonOut, err := labels.GetDepenedencies(d.dockerfile)
+	log.Info(jsonOut)
 	return err
 }

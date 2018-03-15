@@ -3,10 +3,13 @@
     "title": "Dependencies",
 	"type": "array",
 	"items": {
-		"title": "Depenendency",
+		"title": "Dependency",
 		"type": "object",
 		"properties": {
 			"name": {
+				"type": "string"
+			},
+			"image": {
 				"type": "string"
 			},
 			"ports": {
@@ -25,5 +28,8 @@
 				"type": "boolean"
 			}
 		}
-    }		
+	},
+	"required": [
+		"mandatory"
+	]		
 }

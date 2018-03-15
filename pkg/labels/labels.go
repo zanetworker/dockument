@@ -1,6 +1,13 @@
 package labels
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+
+	"github.com/xeipuuv/gojsonschema"
+	"github.com/zanetworker/dockument/pkg/log"
+	"github.com/zanetworker/dockument/pkg/utils"
+)
 
 // func GetLabels() {
 // }
@@ -30,26 +37,41 @@ const (
 )
 
 //GetDepenedencies fetch the container dependencies from the Dockerfile
-func GetDepenedencies(dockerfile string) (map[string]string, error) {
+func GetDepenedencies(dockerfile string) (string, error) {
+
+	// testMap := map[string]string{"api.DEPENDENCY.redis": "",
+	// 	"api.DEPENDENCY.redis.image": "redis:latest",
+	// 	"api.DEPENDENCY.adel":        "",
+	// 	"api.DEPENDENCY.adel.image":  "redis:latest",
+	// }
+	// fmt.Printf("%#v", parseDependencies(testMap))
+	// return nil, nil
+
 	labels, err := getLabels(dockerfile)
 	if err != nil {
-
+		return "", err
 	}
 	labelsToReturn, err := fetchLabelsFor(DEPENDENCY, labels)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
-	return labelsToReturn, nil
+
+	dockerfileDependencies := parseDependencies(labelsToReturn)
+	data, err := json.Marshal(dockerfileDependencies)
+	if err != nil {
+		return "", err
+	}
+	return string(data), nil
 }
 
 //GetEnvs fetch cotnainer environment variables from the Dockerfile
 func GetEnvs() {
-	schemaLoader := gojsonschema.NewReferenceLoader("file:///home/me/schema.json")
-	documentLoader := gojsonschema.NewReferenceLoader("file:///home/me/document.json")
+	schemaLoader := gojsonschema.NewReferenceLoader("file://" + utils.GetDir("api") + "/dependencies.json")
+	documentLoader := gojsonschema.NewReferenceLoader("file://" + utils.GetDir("api") + "/test.json")
 
 	result, err := gojsonschema.Validate(schemaLoader, documentLoader)
 	if err != nil {
-		panic(err.Error())
+		log.Error(err.Error())
 	}
 
 	if result.Valid() {

@@ -13,21 +13,19 @@ LABEL api.RESOURCES.Memory=""\
 LABEL api.DEPENDENCY.redis=""\
       api.DEPENDENCY.redis.image="redis:latest"\
       api.DEPENDENCY.redis.port="6379"\
-      api.DEPENDENCY.redis.description="For caching results from OWM API."\
+      api.DEPENDENCY.redis.about="For caching results from OWM API."\
       api.DEPENDENCY.redis.mandatory="true"
-
 
 # Set and describe available ENVs
 LABEL api.ENV.OPENWEATHERMAP_APIKEY="" \
-      api.ENV.OPENWEATHERMAP_APIKEY.description="Access key for OpenWeatherMap. See http://openweathermap.org/appid for details." \
+      api.ENV.OPENWEATHERMAP_APIKEY.about="Access key for OpenWeatherMap. See http://openweathermap.org/appid for details." \
       api.ENV.OPENWEATHERMAP_APIKEY.mandatory="true"
 
 # Desrbite ports exposed by this services and the protocl used
 LABEL api.EXPOSE.1337="" \
       api.EXPOSE.1337.scheme="tcp" \
-	  api.EXPOSE.1337.protocol="http"
-      api.EXPOSE.1337.description="The main endpoint of this service."
-
+	api.EXPOSE.1337.protocol="http"
+      api.EXPOSE.1337.about="The main endpoint of this service."
 
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 ENV GOPATH /go
