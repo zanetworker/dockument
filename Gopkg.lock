@@ -69,21 +69,15 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/zanetworker/go-kubesanity"
-  packages = ["pkg/kubesanityutils"]
-  revision = "0d20268a6d73f29c22e57f7509f8f90eb6ea6018"
-
-[[projects]]
-  branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "182114d582623c1caa54f73de9c7224e23a48487"
+  revision = "21652f85b0fdddb6c2b6b77a5beca5c5a908174a"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix","windows"]
-  revision = "8c0ece68c28377f4c326d85b94f8df0dace46f80"
+  revision = "5c2edb58fda888fd038aa977e03e3d5d6151bf1b"
 
 [[projects]]
   name = "gopkg.in/yaml.v2"
@@ -100,6 +94,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "44428604605c1b75c732ee7388f5b3d3b5d6b98ec64082d2421996c288f2dfdc"
+  inputs-digest = "8c633070ab3097dfcf1fcad989d6498d92e99b5140520f1d42ebce0a4e7c2595"
   solver-name = "gps-cdcl"
   solver-version = 1

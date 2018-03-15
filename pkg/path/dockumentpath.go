@@ -20,7 +20,7 @@ import (
 )
 
 // Home describes the location of a CLI configuration.
-// This helper builds paths relative to a kubesanity Home directory.
+// This helper builds paths relative to a dockument Home directory.
 type Home string
 
 // String returns Home as a string.

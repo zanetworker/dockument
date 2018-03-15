@@ -4,7 +4,7 @@ import (
 	"io"
 
 	"github.com/spf13/cobra"
-	"github.com/zanetworker/DOCKument/pkg/labels"
+	"github.com/zanetworker/dockument/pkg/labels"
 	"github.com/zanetworker/dockument/pkg/utils"
 )
 
@@ -13,7 +13,7 @@ This command is used to DOCKument Dockerfiles`
 
 var defaultDockumentLocation = utils.GetDir("root")
 
-type dockerCmdParams struct {
+type dockerCmdParams struct {	
 	dockerfile  string
 	outLocation string
 }

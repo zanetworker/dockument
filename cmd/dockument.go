@@ -37,10 +37,10 @@ const globalUsage = `
 DOCKument is a tool to auto-generate Documentation for container images (Dockerfiles).
 
 Environment:
-$DOCKUMENT_HOME          set an alternative DOCKument location for files. By default, these are stored in ~/.kubesanity
+$DOCKUMENT_HOME          set an alternative DOCKument location for files. By default, these are stored in ~/.dockument
 `
 
-var kubesanityLogo = `
+var dockumentLogo = `
 ######  #######  #####  #    #                                   
 #     # #     # #     # #   #  #    # #    # ###### #    # ##### 
 #     # #     # #       #  #   #    # ##  ## #      ##   #   #   
@@ -75,12 +75,12 @@ func newRootCmd(args []string) *cobra.Command {
 }
 
 func printLogo() {
-	figletColoured := aec.BlueF.Apply(kubesanityLogo)
+	figletColoured := aec.BlueF.Apply(dockumentLogo)
 	if runtime.GOOS == "windows" {
-		figletColoured = aec.BlueF.Apply(kubesanityLogo)
+		figletColoured = aec.BlueF.Apply(dockumentLogo)
 	}
 	if _, err := fmt.Println(figletColoured); err != nil {
-		log.ErrorS("Failed to print kubesanity figlet", err)
+		log.ErrorS("Failed to print dockument figlet", err)
 	}
 }
 

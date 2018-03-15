@@ -22,6 +22,10 @@
 
 
 [[constraint]]
+  name = "github.com/docker/docker"
+  version = "1.13.1"
+
+[[constraint]]
   name = "github.com/fatih/color"
   version = "1.6.0"
 
@@ -50,5 +54,5 @@
   version = "6.0.0"
 
 [[constraint]]
-  name = "github.com/docker/docker"
-  version = "1.13.1"
+  branch = "master"
+  name = "github.com/xeipuuv/gojsonschema"

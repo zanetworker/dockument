@@ -44,7 +44,6 @@ func GetDepenedencies(dockerfile string) (map[string]string, error) {
 
 //GetEnvs fetch cotnainer environment variables from the Dockerfile
 func GetEnvs() {
-
 	schemaLoader := gojsonschema.NewReferenceLoader("file:///home/me/schema.json")
 	documentLoader := gojsonschema.NewReferenceLoader("file:///home/me/document.json")
 

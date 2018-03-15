@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Dependencies",
+	"type": "array",
+	"items": {
+		"title": "Depenendency",
+		"type": "object",
+		"properties": {
+			"name": {
+				"type": "string"
+			},
+			"ports": {
+				"type": "array", 
+				"items": { 
+					"type": "string"
+				},
+				"minItems": 1, 
+				"uniqueItems": true
+			},
+			"about": {
+				"type": "string"
+			},
+			"mandatory":{
+				"description": "describes whether this dependency is optional or mandatory",
+				"type": "boolean"
+			}
+		}
+    }		
+}
