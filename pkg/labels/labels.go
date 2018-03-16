@@ -58,7 +58,18 @@ func GetDepenedencies(dockerfile string) (*Dependencies, error) {
 }
 
 //GetEnvs fetch cotnainer environment variables from the Dockerfile
-func GetEnvs() {
+func GetEnvs(dockerfile string) (*Envs, error) {
+	//TODO
+	labels, err := getLabels(dockerfile)
+	if err != nil {
+		return nil, err
+	}
+
+	// labelsToReturn, err := fetchLabelsFor(ENVS, labels)
+	// if err != nil {
+	// 	return nil, err
+	// }
+	return nil, nil
 }
 
 //GetResources fetch the container resources from the Dockerfile

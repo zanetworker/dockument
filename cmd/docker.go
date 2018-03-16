@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"io"
 
 	"github.com/spf13/cobra"
-	"github.com/zanetworker/dockument/pkg/labels"
+	"github.com/zanetworker/dockument/internal/commands"
 	"github.com/zanetworker/dockument/pkg/utils"
 )
 
@@ -39,14 +38,6 @@ func newDockerCreateCmd(out io.Writer) *cobra.Command {
 }
 
 func (d *dockerCreateCmd) run() error {
-	dependencies, err := labels.GetDepenedencies(d.dockerfile)
-	for _, dependency := range *(dependencies) {
-		fmt.Println(utils.ColorString("blue", "### Dependency ###"))
-		fmt.Printf("	%s: %s \n", utils.ColorString("green", "Application"), dependency.Name)
-		fmt.Printf("	Image: %s\n", dependency.Image)
-		fmt.Printf("	Description: %s\n", dependency.About)
-		fmt.Printf("	Ports: %s\n", dependency.Ports)
-		fmt.Printf("	Required: %s\n", dependency.Mandatory)
-	}
-	return err
+	commands.CreateDockument(d.dockerfile, d.outLocation)
+	return nil
 }
