@@ -2,15 +2,9 @@ package labels
 
 import (
 	"encoding/json"
-	"fmt"
 
-	"github.com/xeipuuv/gojsonschema"
-	"github.com/zanetworker/dockument/pkg/log"
-	"github.com/zanetworker/dockument/pkg/utils"
+	log "github.com/sirupsen/logrus"
 )
-
-// func GetLabels() {
-// }
 
 // Functions to use in the template
 // var fm = template.FuncMap{}
@@ -37,51 +31,34 @@ const (
 )
 
 //GetDepenedencies fetch the container dependencies from the Dockerfile
-func GetDepenedencies(dockerfile string) (string, error) {
-
-	// testMap := map[string]string{"api.DEPENDENCY.redis": "",
-	// 	"api.DEPENDENCY.redis.image": "redis:latest",
-	// 	"api.DEPENDENCY.adel":        "",
-	// 	"api.DEPENDENCY.adel.image":  "redis:latest",
-	// }
-	// fmt.Printf("%#v", parseDependencies(testMap))
-	// return nil, nil
-
+func GetDepenedencies(dockerfile string) (*Dependencies, error) {
 	labels, err := getLabels(dockerfile)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
+
 	labelsToReturn, err := fetchLabelsFor(DEPENDENCY, labels)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	dockerfileDependencies := parseDependencies(labelsToReturn)
-	data, err := json.Marshal(dockerfileDependencies)
-	if err != nil {
-		return "", err
-	}
-	return string(data), nil
-}
-
-//GetEnvs fetch cotnainer environment variables from the Dockerfile
-func GetEnvs() {
-	schemaLoader := gojsonschema.NewReferenceLoader("file://" + utils.GetDir("api") + "/dependencies.json")
-	documentLoader := gojsonschema.NewReferenceLoader("file://" + utils.GetDir("api") + "/test.json")
-
-	result, err := gojsonschema.Validate(schemaLoader, documentLoader)
+	json, _ := json.Marshal(dockerfileDependencies)
+	valid, err := validateMyObjectWithSchema("dependencies.json", string(json), "raw")
 	if err != nil {
 		log.Error(err.Error())
 	}
 
-	if result.Valid() {
-		fmt.Printf("The document is valid\n")
-	} else {
-		fmt.Printf("The document is not valid. see errors :\n")
-		for _, desc := range result.Errors() {
-			fmt.Printf("- %s\n", desc)
-		}
+	//TODO improve or decouple validation
+	if !valid {
+		log.Warn("your the dependencies are not in a valid json format thus can't be used as is")
 	}
+
+	return dockerfileDependencies, nil
+}
+
+//GetEnvs fetch cotnainer environment variables from the Dockerfile
+func GetEnvs() {
 }
 
 //GetResources fetch the container resources from the Dockerfile
@@ -97,4 +74,8 @@ func GetExposedPorts() {
 //GetTags fetch the tags used in the Dockerfile
 func GetTags() {
 
+}
+
+//GetAllLabels gets all the dockerfile labels
+func GetAllLabels() {
 }

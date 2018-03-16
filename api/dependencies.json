@@ -25,7 +25,7 @@
 			},
 			"mandatory":{
 				"description": "describes whether this dependency is optional or mandatory",
-				"type": "boolean"
+				"type": "string"
 			}
 		}
 	},

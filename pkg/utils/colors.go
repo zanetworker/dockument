@@ -11,6 +11,9 @@ func ColorString(colorToPrint, messageToPrint string) string {
 		c = color.New(color.FgRed)
 	case "green":
 		c = color.New(color.FgGreen)
+	case "blue":
+		c = color.New(color.FgBlue)
 	}
+
 	return c.Sprint(messageToPrint)
 }

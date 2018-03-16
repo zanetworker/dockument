@@ -1,11 +1,14 @@
 package labels
 
 import (
+	"errors"
 	"os"
 	"regexp"
 
 	"github.com/docker/docker/builder/dockerfile/parser"
-	log "github.com/zanetworker/dockument/pkg/log"
+	log "github.com/sirupsen/logrus"
+	"github.com/xeipuuv/gojsonschema"
+	"github.com/zanetworker/dockument/pkg/utils"
 )
 
 //DefaultEscapeToken escape token for dockerfile
@@ -29,8 +32,6 @@ func getLabels(dockerfile string) (map[string]string, error) {
 }
 
 func parseDockerfileNodes(searchFnc func(string, []*parser.Node) error, filename string) error {
-	log.Info("Parsing Dockerfile:" + filename)
-
 	f, err := os.Open(filename)
 	if err != nil {
 		return err
@@ -118,4 +119,32 @@ func fetchLabelsFor(labelType string, labelMap map[string]string) (map[string]st
 		}
 	}
 	return fetchedLabelsToReturn, nil
+}
+
+func validateMyObjectWithSchema(schema string, jsonTovalidate string, jsonContentType string) (bool, error) {
+	var result *gojsonschema.Result
+	var err error
+
+	switch jsonContentType {
+	case "file":
+		schemaLoader := gojsonschema.NewReferenceLoader("file://" + utils.GetDir("api") + "/" + schema)
+		documentLoader := gojsonschema.NewReferenceLoader("file://" + utils.GetDir("api") + "/" + jsonTovalidate)
+		result, err = gojsonschema.Validate(schemaLoader, documentLoader)
+		if err != nil {
+			log.Error(err.Error())
+			return false, err
+		}
+	case "raw":
+		schemaLoader := gojsonschema.NewReferenceLoader("file://" + utils.GetDir("api") + "/" + schema)
+		documentLoader := gojsonschema.NewStringLoader(jsonTovalidate)
+		result, err = gojsonschema.Validate(schemaLoader, documentLoader)
+		if err != nil {
+			log.Error(err.Error())
+			return false, err
+		}
+	default:
+		return false, errors.New("Invalid type used, valid types are: \"file\" or \"raw\"")
+	}
+
+	return result.Valid(), nil
 }

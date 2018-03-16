@@ -3,10 +3,9 @@ package labels
 import (
 	"fmt"
 	"regexp"
-	"strconv"
 	"strings"
 
-	log "github.com/zanetworker/dockument/pkg/log"
+	log "github.com/sirupsen/logrus"
 )
 
 func parseDependencies(dependencyLabels map[string]string) *Dependencies {
@@ -26,8 +25,7 @@ func parseDependencies(dependencyLabels map[string]string) *Dependencies {
 				case "about":
 					dependency.About = value
 				case "mandatory":
-					//TODO handle error correclty
-					dependency.Mandatory, _ = strconv.ParseBool(value)
+					dependency.Mandatory = value
 				}
 			} else {
 				dependency.Name = dependencyLabelStrings[2]

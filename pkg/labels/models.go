@@ -4,7 +4,7 @@ package labels
 type Dependency struct {
 	About     string   `json:"about,omitempty"`
 	Image     string   `json:"image,omitempty"`
-	Mandatory bool     `json:"mandatory,omitempty"`
+	Mandatory string   `json:"mandatory,omitempty"`
 	Name      string   `json:"name,omitempty"`
 	Ports     []string `json:"ports,omitempty"`
 }

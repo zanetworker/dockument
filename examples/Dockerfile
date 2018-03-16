@@ -16,6 +16,13 @@ LABEL api.DEPENDENCY.redis=""\
       api.DEPENDENCY.redis.about="For caching results from OWM API."\
       api.DEPENDENCY.redis.mandatory="true"
 
+# Describe container dependencies
+LABEL api.DEPENDENCY.rabbit=""\
+      api.DEPENDENCY.rabbit.image="rabbit:latest"\
+      api.DEPENDENCY.rabbit.port="5271"\
+      api.DEPENDENCY.rabbit.about="The rabbit"\
+      api.DEPENDENCY.rabbit.mandatory="true"
+
 # Set and describe available ENVs
 LABEL api.ENV.OPENWEATHERMAP_APIKEY="" \
       api.ENV.OPENWEATHERMAP_APIKEY.about="Access key for OpenWeatherMap. See http://openweathermap.org/appid for details." \
