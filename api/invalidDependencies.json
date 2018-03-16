@@ -1,0 +1,6 @@
+[{
+	"name": "hello", 
+	"ports": "1234",
+	"about": "test",
+	"mandatory": "true"
+  }]
