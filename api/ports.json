@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Ports",
+	"type": "array",
+	"items": {
+		"title": "Port",
+		"type": "object",
+		"properties": {
+			"name": {
+				"type": "string"
+			},
+			"about": {
+				"type": "string"
+			},
+			"scheme":{
+				"description": "describes the protocol scheme e.g",
+				"type": "string"
+			},
+			"protocol":{
+				"description": "describes the protocol scheme e.g",
+				"type": "string"
+			}
+		}
+	}
+}
+
+

@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Envs",
+	"type": "array",
+	"items": {
+		"title": "Env",
+		"type": "object",
+		"properties": {
+			"name": {
+				"type": "string"
+			},
+			"about": {
+				"type": "string"
+			},
+			"mandatory":{
+				"description": "describes whether this Env is optional or mandatory",
+				"type": "string"
+			}
+		}
+	},
+	"required": [
+		"mandatory"
+	]		
+}
