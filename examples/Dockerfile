@@ -7,7 +7,7 @@ LABEL api.TAGS.go="1.9"
 
 # Describe Image minimum resource requirements 
 LABEL api.RESOURCES.Memory=""\
-      api.RESOURCES.CPU=""\
+      api.RESOURCES.CPU=""
 
 ###  Describe container dependencies
 LABEL api.DEPENDENCY.redis=""\
@@ -30,7 +30,7 @@ LABEL api.ENV.OPENWEATHERMAP_APIKEY="" \
 ###  Desrbite ports exposed by this services and the protocl used
 LABEL api.EXPOSE.1337="" \
       api.EXPOSE.1337.scheme="tcp" \
-	api.EXPOSE.1337.protocol="http"
+	api.EXPOSE.1337.protocol="http"\
       api.EXPOSE.1337.about="The main endpoint of this service."
 
 ENV PATH /go/bin:/usr/local/go/bin:$PATH

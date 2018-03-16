@@ -23,8 +23,8 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/cobra/doc"
 
+	log "github.com/sirupsen/logrus"
 	dockument_env "github.com/zanetworker/dockument/pkg/environment"
-	"github.com/zanetworker/dockument/pkg/log"
 )
 
 var (
@@ -75,18 +75,18 @@ func newRootCmd(args []string) *cobra.Command {
 	return dockumentCmd
 }
 
-func printLogo() {
-	figletColoured := aec.BlueF.Apply(dockumentLogo)
+func printLogo(logoToPrint string) {
+	figletColoured := aec.GreenF.Apply(logoToPrint)
 	if runtime.GOOS == "windows" {
-		figletColoured = aec.BlueF.Apply(dockumentLogo)
+		figletColoured = aec.BlueF.Apply(logoToPrint)
 	}
 	if _, err := fmt.Println(figletColoured); err != nil {
-		log.ErrorS("Failed to print dockument figlet", err)
+		log.Errorf("Failed to print dockument figlet, error: %s", err.Error())
 	}
 }
 
 func runDockument(cmd *cobra.Command, args []string) {
-	printLogo()
+	printLogo(dockumentLogo)
 	if len(args) == 0 {
 		cmd.Help()
 	}

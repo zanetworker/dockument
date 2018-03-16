@@ -85,7 +85,7 @@ func fetchLabelsFor(labelType string, labelMap map[string]string) (map[string]st
 				fetchedLabelsToReturn[key] = value
 			}
 		case "ENVS":
-			r, err := regexp.Compile(`^api.ENVS.*$`)
+			r, err := regexp.Compile(`^api.ENV.*$`)
 			if err != nil {
 				return nil, err
 			}
@@ -93,7 +93,7 @@ func fetchLabelsFor(labelType string, labelMap map[string]string) (map[string]st
 				fetchedLabelsToReturn[key] = value
 			}
 		case "EXPOSED":
-			r, err := regexp.Compile(`^api.EXPOSED.*$`)
+			r, err := regexp.Compile(`^api.EXPOSE.*$`)
 			if err != nil {
 				return nil, err
 			}

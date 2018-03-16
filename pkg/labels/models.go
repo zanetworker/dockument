@@ -21,3 +21,14 @@ type Env struct {
 
 //Envs array of environment variable objects
 type Envs []Env
+
+//Port is the exposed port object for the Dockerfile
+type Port struct {
+	Name     string `json:"name,omitempty"`
+	About    string `json:"about,omitempty"`
+	Scheme   string `json:"scheme,omitempty"`
+	Protocol string `json:"protocol,omitempty"`
+}
+
+//Ports that should be exposed by the container application
+type Ports []Port

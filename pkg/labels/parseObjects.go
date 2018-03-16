@@ -1,11 +1,7 @@
 package labels
 
 import (
-	"fmt"
-	"regexp"
 	"strings"
-
-	log "github.com/sirupsen/logrus"
 )
 
 func parseDependencies(dependencyLabels map[string]string) *Dependencies {
@@ -36,32 +32,50 @@ func parseDependencies(dependencyLabels map[string]string) *Dependencies {
 	return &dependencies
 }
 
-func divideMapByKey(mapToDivide map[string]string) []map[string]string {
-	mapsToReturn := []map[string]string{}
-	for _, pattern := range getApplicationPatterns(mapToDivide) {
-		tempMap := map[string]string{}
-		r, err := regexp.Compile(fmt.Sprintf(`%s`, pattern))
-		if err != nil {
-			log.Error(err.Error())
-		}
-		for key, value := range mapToDivide {
-			if r.MatchString(key) == true {
-				tempMap[key] = value
+func parseEnvs(envLabels map[string]string) *Envs {
+	envs := Envs{}
+	for _, envMap := range divideMapByKey(envLabels) {
+		env := Env{}
+		for envLabel, value := range envMap {
+			envLabelStrings := strings.Split(envLabel, ".")
+			if len(envLabelStrings) > 3 {
+				envParam := envLabelStrings[3]
+				switch envParam {
+				case "about":
+					env.About = value
+				case "mandatory":
+					env.Mandatory = value
+				}
+			} else {
+				env.Name = envLabelStrings[2]
 			}
 		}
-		mapsToReturn = append(mapsToReturn, tempMap)
+		envs = append(envs, env)
 	}
-	return mapsToReturn
+	return &envs
 }
 
-func getApplicationPatterns(mapToDivideAndGroup map[string]string) []string {
-	applicationsPattterns := []string{}
-	for parentKey := range mapToDivideAndGroup {
-		splittedKey := strings.Split(parentKey, ".")
-		if len(splittedKey) == 3 {
-			pattern := "^" + parentKey + ".*" + "$"
-			applicationsPattterns = append(applicationsPattterns, pattern)
+func parsePorts(portLabels map[string]string) *Ports {
+	ports := Ports{}
+	for _, portMap := range divideMapByKey(portLabels) {
+		port := Port{}
+		for portLabel, value := range portMap {
+			portLabelStrings := strings.Split(portLabel, ".")
+			if len(portLabelStrings) > 3 {
+				portParam := portLabelStrings[3]
+				switch portParam {
+				case "about":
+					port.About = value
+				case "scheme":
+					port.Scheme = value
+				case "protocol":
+					port.Protocol = value
+				}
+			} else {
+				port.Name = portLabelStrings[2]
+			}
 		}
+		ports = append(ports, port)
 	}
-	return applicationsPattterns
+	return &ports
 }

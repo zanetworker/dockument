@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"io"
 
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"github.com/zanetworker/dockument/pkg/log"
 	"github.com/zanetworker/dockument/pkg/version"
 )
 

@@ -18,8 +18,8 @@ import (
 	"os"
 	"path/filepath"
 
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/pflag"
-	"github.com/zanetworker/dockument/pkg/log"
 	"github.com/zanetworker/dockument/pkg/path"
 	"k8s.io/client-go/util/homedir"
 )
@@ -76,7 +76,7 @@ func setFlagFromEnv(name, envar string, fs *pflag.FlagSet) {
 	}
 	if v, ok := os.LookupEnv(envar); ok {
 		if err := fs.Set(name, v); err != nil {
-			log.ErrorS("Failed to Set Env variable", err)
+			log.Errorf("Failed to Set Env variable %s", err.Error())
 		}
 	}
 }

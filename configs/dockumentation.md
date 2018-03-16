@@ -1,12 +1,19 @@
 
-
-#  DOCKumentation 
+#  DOCKumentation
 
 Your application Dockerfile is DOCKumented below. 
 
 ## Exposed Ports
 
-Below are the ports the should be exposed by your application: 
+Below are the ports the should be exposed by your application:
+### Port 1337
+
+- **Name**: 1337
+- **About**: "The main endpoint of this service."
+- **Scheme**: "tcp"
+- **Protocol**: "http"
+
+
 
 ## Dependencies
 
@@ -20,6 +27,8 @@ Below are your container application dependencies:
 - **Ports**: ["6379"]
 - **Mandatory**: "true"
 
+
+
 ### Dependency rabbit
 
 - **Name**: rabbit
@@ -29,9 +38,18 @@ Below are your container application dependencies:
 - **Mandatory**: "true"
 
 
+
 ## Environment Variables
 
 Below are some important Environment Variables:
+
+### Env OPENWEATHERMAP_APIKEY
+
+- **Name**: OPENWEATHERMAP_APIKEY
+- **About**: "Access key for OpenWeatherMap. See http://openweathermap.org/appid for details."
+- **Mandatory**: "true"
+
+
 
 ## Resources Required
 
