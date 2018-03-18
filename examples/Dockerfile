@@ -6,8 +6,8 @@ FROM golang:alpine as builder
 LABEL api.TAGS.go="1.9"
 
 # Describe Image minimum resource requirements 
-LABEL api.RESOURCES.Memory=""\
-      api.RESOURCES.CPU=""
+LABEL api.RESOURCES.Memory="3gb"\
+      api.RESOURCES.CPU="2"
 
 ###  Describe container dependencies
 LABEL api.DEPENDENCY.redis=""\

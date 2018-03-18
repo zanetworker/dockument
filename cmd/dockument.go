@@ -66,6 +66,8 @@ func newRootCmd(args []string) *cobra.Command {
 	dockumentCmd.AddCommand(
 		newDockerCreateCmd(out),
 		newDependenciesCmd(out),
+		newResourcesCmd(out),
+		newPortsCmd(out),
 		newVersionCmd(out),
 	)
 

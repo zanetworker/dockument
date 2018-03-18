@@ -1,8 +1,10 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"io"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/zanetworker/dockument/pkg/labels"
@@ -28,19 +30,24 @@ func newDependenciesCmd(out io.Writer) *cobra.Command {
 	}
 
 	f := dockerCmd.Flags()
-	f.StringVar(&dependenciesCmdParams.dockerfile, "dockerfile", "", "the path of the Dockerfile to Document")
+	f.StringVar(&dependenciesCmdParams.dockerfile, "dockerfile", "", "the path of the Dockerfile to Dockument")
 
 	return dockerCmd
 }
 func (d *dependenciesCmd) run() error {
-	dependencies, err := labels.GetDepenedencies(d.dockerfile)
-	for _, dependency := range *(dependencies) {
-		fmt.Println(utils.ColorString("blue", "### Dependency ###"))
-		fmt.Printf("	%s: %s \n", utils.ColorString("green", "Application"), dependency.Name)
-		fmt.Printf("	%s: %s\n", utils.ColorString("green", "Image"), dependency.Image)
-		fmt.Printf("	%s: %s\n", utils.ColorString("green", "Description"), dependency.About)
-		fmt.Printf("	%s: %s\n", utils.ColorString("green", "Ports"), dependency.Ports)
-		fmt.Printf("	%s: %s\n", utils.ColorString("green", "Required"), dependency.Mandatory)
+	if len(d.dockerfile) != 0 {
+		dependencies, err := labels.GetDepenedencies(d.dockerfile)
+		for _, dependency := range *(dependencies) {
+			fmt.Printf(utils.ColorString("blue", "### Dependency %s ### \n"), strings.ToUpper(dependency.Name))
+			fmt.Printf("	%s: %s \n", utils.ColorString("green", "Application"), dependency.Name)
+			fmt.Printf("	%s: %s\n", utils.ColorString("green", "Image"), dependency.Image)
+			fmt.Printf("	%s: %s\n", utils.ColorString("green", "Description"), dependency.About)
+			fmt.Printf("	%s: %s\n", utils.ColorString("green", "Ports"), dependency.Ports)
+			fmt.Printf("	%s: %s\n", utils.ColorString("green", "Required"), dependency.Mandatory)
+		}
+		return err
 	}
-	return err
+
+	return errors.New(utils.ColorString("red", "Please specfiy a path for the dockerfile to Dockument"))
+
 }

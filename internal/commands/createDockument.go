@@ -72,3 +72,7 @@ func CreateDockument(dockerfile, dockumentPath string) {
 
 	tplDockument.ExecuteTemplate(f, "dockument", templateData)
 }
+
+func ValidPath(dockerfile string) bool {
+	return isValidPath(dockerfile)
+}

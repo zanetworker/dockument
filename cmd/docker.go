@@ -59,7 +59,7 @@ func newDockerCreateCmd(out io.Writer) *cobra.Command {
 
 	f := dockerCmd.Flags()
 
-	f.StringVar(&dockerCreateCmdParams.dockerfile, "dockerfile", "", "the path of the Dockerfile to Document")
+	f.StringVar(&dockerCreateCmdParams.dockerfile, "dockerfile", "", "the path of the Dockerfile to Dockument")
 	f.StringVarP(&dockerCreateCmdParams.outLocation, "out", "o", defaultDockumentLocation, "the output location of documentation")
 
 	return dockerCmd

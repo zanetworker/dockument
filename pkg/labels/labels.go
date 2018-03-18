@@ -89,7 +89,30 @@ func GetEnvs(dockerfile string) (*Envs, error) {
 }
 
 //GetResources fetch the container resources from the Dockerfile
-func GetResources(dockerfile string) {
+func GetResources(dockerfile string) (*Resources, error) {
+	//TODO
+	labels, err := getLabels(dockerfile)
+	if err != nil {
+		return nil, err
+	}
+
+	resourcesToReturn, err := fetchLabelsFor(RESOURCES, labels)
+	if err != nil {
+		return nil, err
+	}
+
+	dockerfileResources := parseResources(resourcesToReturn)
+	json, _ := json.Marshal(dockerfileResources)
+	valid, err := validateMyObjectWithSchema("resources.json", string(json), "raw")
+	if err != nil {
+		log.Error(err.Error())
+	}
+
+	//TODO improve or decouple validation
+	if !valid {
+		log.Warn("your Resources are not in a valid json format thus can't be used as is")
+	}
+	return dockerfileResources, nil
 }
 
 //GetExposedPorts fetch the texposed ports from the Dockerfile

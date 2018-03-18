@@ -79,3 +79,18 @@ func parsePorts(portLabels map[string]string) *Ports {
 	}
 	return &ports
 }
+func parseResources(resourceLabels map[string]string) *Resources {
+	resources := Resources{}
+	for resourceLabel, value := range resourceLabels {
+		resourceLabelString := strings.Split(resourceLabel, ".")
+		resourceParam := resourceLabelString[2]
+
+		switch resourceParam {
+		case "CPU":
+			resources.CPU = value
+		case "Memory":
+			resources.Memory = value
+		}
+	}
+	return &resources
+}
