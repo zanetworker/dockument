@@ -17,6 +17,8 @@ type dockumentTemplateParams struct {
 	Dependencies *labels.Dependencies
 	Envs         *labels.Envs
 	Ports        *labels.Ports
+	Resources    *labels.Resources
+	Tags         *labels.Tags
 }
 
 func init() {
@@ -63,16 +65,28 @@ func CreateDockument(dockerfile, dockumentPath string) {
 	if err != nil {
 		log.Fatalf("Failed to retrieve envs, error: %s", err.Error())
 	}
+	// Fetch Environment variables
+	resources, err := labels.GetResources(dockerfile)
+	if err != nil {
+		log.Fatalf("Failed to retrieve resources, error: %s", err.Error())
+	}
 
+	tags, err := labels.GetTags(dockerfile)
+	if err != nil {
+		log.Fatalf("Failed to retrieve tags, error: %s", err.Error())
+	}
 	templateData := dockumentTemplateParams{
 		Dependencies: deps,
 		Envs:         envs,
 		Ports:        ports,
+		Resources:    resources,
+		Tags:         tags,
 	}
 
 	tplDockument.ExecuteTemplate(f, "dockument", templateData)
 }
 
+//ValidPath is a helper function to assert validity of a file path
 func ValidPath(dockerfile string) bool {
 	return isValidPath(dockerfile)
 }

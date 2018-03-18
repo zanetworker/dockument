@@ -35,12 +35,16 @@ func (d *allCmd) run() error {
 	if len(d.dockerfile) != 0 {
 		err := printDependencies(d.dockerfile)
 		err = printPorts(d.dockerfile)
+		err = printEnvs(d.dockerfile)
 		err = printResources(d.dockerfile)
 		err = printTags(d.dockerfile)
-
 		return err
 	}
-
 	return errors.New(utils.ColorString("red", "Please specfiy a path for the dockerfile to Dockument"))
+}
 
+func returnIfErr(err error) {
+	if err != nil {
+
+	}
 }

@@ -4,6 +4,7 @@
 Your application Dockerfile is DOCKumented below. 
 
 ## Exposed Ports
+ 
 
 Below are the ports the should be exposed by your application:
 ### Port 1337
@@ -14,9 +15,9 @@ Below are the ports the should be exposed by your application:
 - **Protocol**: "http"
 
 
-
 ## Dependencies
 
+ 
 Below are your container application dependencies:
 
 ### Dependency redis
@@ -26,7 +27,6 @@ Below are your container application dependencies:
 - **About**: "For caching results from OWM API."
 - **Ports**: ["6379"]
 - **Mandatory**: "true"
-
 
 
 ### Dependency rabbit
@@ -39,8 +39,9 @@ Below are your container application dependencies:
 
 
 
-## Environment Variables
 
+## Environment Variables
+ 
 Below are some important Environment Variables:
 
 ### Env OPENWEATHERMAP_APIKEY
@@ -51,13 +52,21 @@ Below are some important Environment Variables:
 
 
 
+
 ## Resources Required
-
+  
+  
 Resources required by your container application to run with reasonable performance: 
+- **CPU**: "2"
+- **Memory**: "3gb"
 
 
-## Metadata & Extra Information
 
-Container application tags and metadata: 
+
+## Tags / Metadata
+
+Metadata and container tags:
+- **go**: "1.9"
+
 
 

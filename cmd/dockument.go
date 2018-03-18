@@ -69,6 +69,7 @@ func newRootCmd(args []string) *cobra.Command {
 		newResourcesCmd(out),
 		newPortsCmd(out),
 		newTagsCmd(out),
+		newEnvsCmd(out),
 		newAllCmd(out),
 		newVersionCmd(out),
 	)
