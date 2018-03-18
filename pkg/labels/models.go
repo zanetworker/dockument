@@ -38,3 +38,6 @@ type Resources struct {
 	CPU    string `json:"cpu,omitempty"`
 	Memory string `json:"memory,omitempty"`
 }
+
+//Tags tags from dockerfile
+type Tags map[string]string

@@ -146,8 +146,19 @@ func GetExposedPorts(dockerfile string) (*Ports, error) {
 }
 
 //GetTags fetch the tags used in the Dockerfile
-func GetTags() {
+func GetTags(dockerfile string) (*Tags, error) {
+	labels, err := getLabels(dockerfile)
+	if err != nil {
+		return nil, err
+	}
 
+	tagsToReturn, err := fetchLabelsFor(TAGS, labels)
+	if err != nil {
+		return nil, err
+	}
+
+	dockerfileTags := parseTags(tagsToReturn)
+	return dockerfileTags, nil
 }
 
 //GetAllLabels gets all the dockerfile labels

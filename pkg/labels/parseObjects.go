@@ -94,3 +94,14 @@ func parseResources(resourceLabels map[string]string) *Resources {
 	}
 	return &resources
 }
+
+//Tags have dynamic keys
+func parseTags(tagLabels map[string]string) *Tags {
+	tags := Tags{}
+	for tagLabel, value := range tagLabels {
+		tagLabelSting := strings.Split(tagLabel, ".")
+		tagParam := tagLabelSting[2]
+		tags[tagParam] = value
+	}
+	return &tags
+}

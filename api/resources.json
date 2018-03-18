@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+	"title": "Resource",
+	"type": "object",
+	"properties": {
+		"cpu": {
+			"type": "string"
+		},
+		"memory":{
+			"type": "string"
+		}
+	},
+	"required": [
+		"cpu", 
+		"memory"
+	]		
+}
+
+
