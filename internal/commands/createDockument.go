@@ -32,11 +32,7 @@ func init() {
 
 //CreateDockument creates the dockerfile dock-umentation
 func CreateDockument(dockerfile, dockumentPath string) {
-	validOutPath := isValidPath(dockumentPath)
-	if !validOutPath {
-		//TODO replace with proper error type
-		log.Fatalf("Could not create Dockument, output path  ( %s ) is invalid, please check command help", dockumentPath)
-	}
+	checkAndCreatePath(dockumentPath)
 
 	validDockerfilePath := isValidPath(dockerfile)
 	if !validDockerfilePath {

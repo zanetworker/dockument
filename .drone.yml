@@ -1,0 +1,13 @@
+workspace:
+  base: /go
+  path: src/github.com/zanetworker/dockument
+
+pipeline:
+  lint:
+    image: golang
+    commands:
+      - make lint 
+  test: 
+    image: golang
+    commands: 
+      - make test
