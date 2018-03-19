@@ -2,7 +2,7 @@
 
 # DOCKument
 
-DOCKument is a tool that helps you document your Dockerfiles in a consistent manner the way you would expose an API. Matthias Lübken gave an example on how to use "api" like labels to describe important information in the Dockerfile (e.g., resources used, exposed ports, dependencies, etc) [here](https://github.com/luebken/currentweather/blob/master/Dockerfile). This project makes use of the label patterns to fetch important data in Dockerfiles and create Dockumentation for it. 
+DOCKument is a tool that helps you a tool to auto-generate documentation for your Dockerfiles the way you would an API. Matthias Lübken gave an example on how to use "api" like labels to describe important information in the Dockerfile (e.g., resources used, exposed ports, dependencies, etc) [here](https://github.com/luebken/currentweather/blob/master/Dockerfile). This project makes use of the label patterns to fetch important data in Dockerfiles and create Dockumentation for it.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ make OS=<darwin|linux|windows> install
 # execute dockument for command overview
 dockument
 
-# build dockument binary if you don't have go installed
+# build dockument binary 
 make OS=<darwin|linux|windows> dry
 
 # execute dokcument command for overview
@@ -31,33 +31,7 @@ make OS=<darwin|linux|windows> dry
 
 ### Usage
 
-```bash
-DOCKument is a tool to auto-generate Documentation for container images (Dockerfiles).
-
-Environment:
-$DOCKUMENT_HOME          set an alternative DOCKument location for files. By default, these are stored in ~/.dockument
-
-Usage:
-  dockument [flags]
-  dockument [command]
-
-Available Commands:
-  all         fetches all the important DOCKument labels from the Dockerfile
-  create      create documentation for Dockerfiles
-  deps        fetches dependencies from the Dockerfile
-  envs        fetches exposed envs from the Dockerfile
-  help        Help about any command
-  other       fetch all other non-DOCKument labels out of Dockerfiles Dockerfile
-  ports       fetches exposed ports from the Dockerfile
-  resources   fetches resources from the Dockerfile
-  tags        fetches tags from the Dockerfile
-  version     get version
-
-Flags:
-  -h, --help             help for dockument
-      --home string      location of your dockumeny config. Overrides $DOCKUMENT_HOME  (default "/Users/adelias/.dockument")
-      --outpath string   target location for Dockerfile documentation (default "/Users/adelias/go/src/github.com/zanetworker/dockument/cmd")
-```
+<a href="https://asciinema.org/a/nZ75L8GL9FeBkSXiCXCM2Txw2?autoplay=1" target="_blank"><img src="https://asciinema.org/a/nZ75L8GL9FeBkSXiCXCM2Txw2.png" alt="asciicast"/></a>
 
 With DOCKument you have the option to fetch important information about your Dockerfile direcly from the command line or create a markdown document that you can add to your git REPO. 
 
@@ -134,16 +108,6 @@ For a complete example, please have a look at [this Dockerfile](https://github.c
 
 <!-- [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) -->
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use Semantic versioning, to bump the version, execute
-
-```bash
-make BUMP=major|minor|patch bumpversion
-```
-
-<!-- We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).  -->
 
 ## Authors
 
