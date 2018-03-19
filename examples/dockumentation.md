@@ -54,13 +54,9 @@ Below are some important Environment Variables:
 
 
 ## Resources Required
-  
-  
-Resources required by your container application to run with reasonable performance: 
+Resources required by your container application to run with reasonable performance:
 - **CPU**: "2"
 - **Memory**: "3gb"
-
-
 
 
 ## Tags / Metadata
