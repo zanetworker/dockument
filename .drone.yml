@@ -3,6 +3,10 @@ workspace:
   path: src/github.com/zanetworker/dockument
 
 pipeline:
+  build: 
+    image: golang
+    commands: 
+      - make OS=linux dry 
   lint:
     image: golang
     commands:
