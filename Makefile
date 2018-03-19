@@ -1,12 +1,15 @@
 BIN_DIR := $(GOPATH)/bin
 PLATFORMS := darwin windows linux 
+
 OS ?= darwin
 VERSION ?= latest
 BUMP ?= minor
+
 BINARY := dockument
 GOVERAGE := $(BIN_DIR)/goverage 
 GOLINT := $(BIN_DIR)/golint
 GOMETALINTER := $(BIN_DIR)/gometalinter
+
 PKGS := $(shell go list ./... | grep -v /vendor)
 os = $(word 1, $@)
 

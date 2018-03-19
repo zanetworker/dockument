@@ -1,6 +1,9 @@
 FROM golang:alpine as builder
  
 
+# other labels 
+LABEL Maintainer="Adel Zaalouk"
+LABEL Health="test"
 
 # Descibe Image Tags
 LABEL api.TAGS.go="1.9"

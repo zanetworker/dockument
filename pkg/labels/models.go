@@ -41,3 +41,6 @@ type Resources struct {
 
 //Tags tags from dockerfile
 type Tags map[string]string
+
+//Other all other tags regardless of their type in the dockerfile
+type Others map[string]string

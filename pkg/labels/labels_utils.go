@@ -148,6 +148,45 @@ func fetchLabelsFor(labelType string, labelMap map[string]string) (map[string]st
 	return fetchedLabelsToReturn, nil
 }
 
+func fetchOthers(labelMap map[string]string) (Others, error) {
+	fetchedLabelsToReturn := Others{}
+	for key, value := range labelMap {
+		if !keyMatchesPatterns(key) {
+			fetchedLabelsToReturn[key] = value
+		}
+	}
+	return fetchedLabelsToReturn, nil
+}
+
+func keyMatchesPatterns(keyToMatch string) bool {
+	//TODO handle errors correctly
+	rDep, _ := regexp.Compile(`^api.DEPENDENCY.*$`)
+	rEnv, _ := regexp.Compile(`^api.ENV.*$`)
+	rExpose, _ := regexp.Compile(`^api.EXPOSE.*$`)
+	rResources, _ := regexp.Compile(`^api.RESOURCES.*$`)
+	rTags, _ := regexp.Compile(`^api.TAGS.*$`)
+
+	if rDep.MatchString(keyToMatch) {
+		return true
+	}
+	if rEnv.MatchString(keyToMatch) {
+		return true
+	}
+	if rExpose.MatchString(keyToMatch) {
+		return true
+	}
+	if rResources.MatchString(keyToMatch) {
+		return true
+	}
+
+	if rTags.MatchString(keyToMatch) {
+		return true
+	}
+
+	return false
+
+}
+
 func validateMyObjectWithSchema(schema string, jsonTovalidate string, jsonContentType string) (bool, error) {
 	var result *gojsonschema.Result
 	var err error

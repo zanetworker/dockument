@@ -38,6 +38,7 @@ func (d *allCmd) run() error {
 		err = printEnvs(d.dockerfile)
 		err = printResources(d.dockerfile)
 		err = printTags(d.dockerfile)
+		err = printOthers(d.dockerfile)
 		return err
 	}
 	return errors.New(utils.ColorString("red", "Please specfiy a path for the dockerfile to Dockument"))

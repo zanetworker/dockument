@@ -19,6 +19,7 @@ type dockumentTemplateParams struct {
 	Ports        *labels.Ports
 	Resources    *labels.Resources
 	Tags         *labels.Tags
+	Others       *labels.Others
 }
 
 func init() {
@@ -71,14 +72,19 @@ func CreateDockument(dockerfile, dockumentPath string) {
 	if err != nil {
 		log.Fatalf("Failed to retrieve tags, error: %s", err.Error())
 	}
+
+	others, err := labels.GetOtherTags(dockerfile)
+	if err != nil {
+		log.Fatalf("Failed to retrieve tags, error: %s", err.Error())
+	}
 	templateData := dockumentTemplateParams{
 		Dependencies: deps,
 		Envs:         envs,
 		Ports:        ports,
 		Resources:    resources,
 		Tags:         tags,
+		Others:       others,
 	}
-
 	tplDockument.ExecuteTemplate(f, "dockument", templateData)
 }
 

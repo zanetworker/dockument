@@ -16,16 +16,7 @@ Below are the ports the should be exposed by your application:
 - **Scheme**: {{.Scheme}}
 - **Protocol**: {{.Protocol}}
 {{end}}
-{{else}}
-No ports to show, please insert port labels in using the right syntax, for example: 
-
-```dockerfile
-LABEL api.EXPOSE.1337="" \
-      api.EXPOSE.1337.scheme="tcp" \
-	  api.EXPOSE.1337.protocol="http"\
-      api.EXPOSE.1337.about="The main endpoint of this service."
-```
-{{ end }}
+{{end}}
 ## Dependencies
 
 {{ $length := len .Dependencies }} {{ if not (eq $length 0) }}
@@ -41,16 +32,6 @@ Below are your container application dependencies:
 - **Ports**: {{.Ports}}
 - **Mandatory**: {{.Mandatory}}
 {{end}}
-{{else}}
-No dependencies to show, please insert dependency labels in using the right syntax, for example: 
-
-```dockerfile
-LABEL api.DEPENDENCY.rabbit=""\
-      api.DEPENDENCY.rabbit.image="rabbit:latest"\
-      api.DEPENDENCY.rabbit.port="5271"\
-      api.DEPENDENCY.rabbit.about="The rabbit"\
-      api.DEPENDENCY.rabbit.mandatory="true"
-```
 {{end}}
 
 
@@ -66,14 +47,6 @@ Below are some important Environment Variables:
 - **About**: {{.About}}
 - **Mandatory**: {{.Mandatory}}
 {{end}}
-{{else}}
-No dependencies to show, please insert dependency labels in using the right syntax, for example: 
-
-```dockerfile
-LABEL api.ENV.OPENWEATHERMAP_APIKEY="" \
-      api.ENV.OPENWEATHERMAP_APIKEY.about="Access key for OpenWeatherMap. See http://openweathermap.org/appid for details." \
-      api.ENV.OPENWEATHERMAP_APIKEY.mandatory="true"
-```
 {{end}}
 
 
@@ -84,14 +57,6 @@ Resources required by your container application to run with reasonable performa
 - **CPU**: {{.Resources.CPU}}
 - **Memory**: {{.Resources.Memory}}
 {{end}}
-{{else}}
-No resources to show, please insert resources labels using the right syntax, for example: 
-
-
-```dockerfile
-LABEL api.RESOURCES.Memory="3gb"\
-      api.RESOURCES.CPU="2"
-```
 {{end}}
 
 
@@ -101,11 +66,15 @@ Metadata and container tags:
 {{- range $key, $val := .Tags}}
 - **{{ $key }}**: {{ $val}}
 {{end}}
-{{else}}
-No tags / metadata were defined in your Dockerfile, please insert tags using the right syntax, for example: 
-```dockerfile
-LABEL api.TAGS.go="1.9"
-```
 {{end}}
+
+## Misc Labels
+{{ $length  := len .Others }}{{ if not (eq $length 0)}}
+Non-Standard DOCKument API labels: 
+{{- range $key, $val := .Others}}
+- **{{ $key }}**: {{ $val}}
+{{- end}}
+{{end}}
+
 
 {{end}}

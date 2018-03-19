@@ -161,6 +161,12 @@ func GetTags(dockerfile string) (*Tags, error) {
 	return dockerfileTags, nil
 }
 
-//GetAllLabels gets all the dockerfile labels
-func GetAllLabels() {
+//GetOtherTags gets all the dockerfile labels
+func GetOtherTags(dockerfile string) (*Others, error) {
+	labels, err := getLabels(dockerfile)
+	if err != nil {
+		return nil, err
+	}
+	otherLabels, err := fetchOthers(labels)
+	return &otherLabels, err
 }
