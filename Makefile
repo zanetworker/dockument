@@ -5,17 +5,31 @@ VERSION ?= latest
 BUMP ?= minor
 BINARY := dockument
 GOVERAGE := $(BIN_DIR)/goverage 
+GOLINT := $(BIN_DIR)/golint
 GOMETALINTER := $(BIN_DIR)/gometalinter
 PKGS := $(shell go list ./... | grep -v /vendor)
 os = $(word 1, $@)
 
 
 .PHONY: test 
-test: $(GOVERAGE) 
+test: 
 	go test $(PKGS)
 	# goverage -race -coverprofile=coverage.out ./...
     # go tool cover -html=coverage.out
 	
+.PHONY: lint
+lint: $(GOLINT)
+	@echo "+ $@"
+	@golint ./... | grep -v '.pb.go:' | grep -v vendor | tee /dev/stderr
+	
+.PHONY: vet
+vet: 
+	@echo "+ $@"
+	@go vet $(shell go list ./... | grep -v vendor) | grep -v '.pb.go:' | tee /dev/stderr
+
+$(GOLINT): 
+	go get -u golang.org/x/lint/golint
+
 $(GOMETALINTER):
 	go get -u github.com/alecthomas/gometalinter
 	gometalinter --install &> /dev/null
@@ -38,9 +52,10 @@ else
 	cp release/$(BINARY)-$(VERSION)-windows-amd64 $(GOPATH)/bin/$(BINARY)
 endif
 
-.PHONY: lint 
-lint: $(GOMETALINTER)
-	gometalinter ./... --vendor --errors
+# .PHONY: lint 
+# lint: $(GOMETALINTER)
+# 	gometalinter --disable-all --enable=errcheck --enable=vet --enable=vetshadow ...
+# 	gometalinter ./... --vendor --errors
 
 .PHONY: releases 
 releases: release darwin windows linux

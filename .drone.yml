@@ -7,11 +7,7 @@ pipeline:
     image: golang
     commands: 
       - make OS=linux dry 
-  lint:
+  lintAndTest:
     image: golang
     commands:
-      - make lint 
-  test: 
-    image: golang
-    commands: 
-      - make test
+      - make lint test 
