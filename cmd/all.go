@@ -11,6 +11,11 @@ import (
 var allCmdDesc = `
 This command is used to fetch all the important DOCKument labels out of Dockerfiles Dockerfiles`
 
+const (
+	FILE  = "file"
+	IMAGE = "image"
+)
+
 type allCmd struct {
 	dockerfile string
 }
@@ -33,9 +38,10 @@ func newAllCmd(out io.Writer) *cobra.Command {
 }
 func (d *allCmd) run() error {
 	if len(d.dockerfile) != 0 {
-		err := printDependencies(d.dockerfile)
-		err = printPorts(d.dockerfile)
-		err = printEnvs(d.dockerfile)
+		// TODO: add proper error handling here
+		err := printDependencies(d.dockerfile, FILE)
+		err = printPorts(d.dockerfile, FILE)
+		err = printEnvs(d.dockerfile, FILE)
 		err = printResources(d.dockerfile)
 		err = printTags(d.dockerfile)
 		err = printOthers(d.dockerfile)

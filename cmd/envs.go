@@ -16,6 +16,7 @@ This command is used to fetch important ENVs out of Dockerfiles Dockerfiles`
 
 type envsCmd struct {
 	dockerfile string
+	imageName  string
 }
 
 func newEnvsCmd(out io.Writer) *cobra.Command {
@@ -30,20 +31,34 @@ func newEnvsCmd(out io.Writer) *cobra.Command {
 	}
 
 	f := dockerCmd.Flags()
-	f.StringVar(&envsCmdParams.dockerfile, "dockerfile", "", "the path of the Dockerfile to Dockument")
+	f.StringVarP(&envsCmdParams.dockerfile, "dockerfile", "d", "", "the path of the Dockerfile to Dockument")
+	f.StringVarP(&envsCmdParams.imageName, "image", "i", "", "the name of the image to fetch labels from")
 
 	return dockerCmd
 }
 func (d *envsCmd) run() error {
 	if len(d.dockerfile) != 0 {
-		return printEnvs(d.dockerfile)
+		return printEnvs(d.dockerfile, "file")
+	}
+	if len(d.imageName) != 0 {
+		return printEnvs(d.imageName, "image")
+
 	}
 	return errors.New(utils.ColorString("red", "Please specfiy a path for the dockerfile to Dockument"))
 
 }
 
-func printEnvs(dockerfile string) error {
-	envs, err := labels.GetEnvs(dockerfile)
+func printEnvs(name, inputType string) error {
+	var envs *labels.Envs
+	var err error
+
+	switch inputType {
+	case "file":
+		envs, err = labels.GetEnvs(name)
+	case "image":
+		envs, err = labels.GetImageEnvs(name)
+
+	}
 	for _, env := range *envs {
 		fmt.Printf(utils.ColorString("blue", "### ENV %s ### \n"), strings.ToUpper(env.Name))
 		fmt.Printf("	%s: %s \n", utils.ColorString("green", "Name"), env.Name)

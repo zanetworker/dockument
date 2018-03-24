@@ -16,6 +16,7 @@ This command is used to fetch dependencies out of Dockerfiles Dockerfiles`
 
 type dependenciesCmd struct {
 	dockerfile string
+	imageName  string
 }
 
 func newDependenciesCmd(out io.Writer) *cobra.Command {
@@ -30,21 +31,34 @@ func newDependenciesCmd(out io.Writer) *cobra.Command {
 	}
 
 	f := dockerCmd.Flags()
-	f.StringVar(&dependenciesCmdParams.dockerfile, "dockerfile", "", "the path of the Dockerfile to Dockument")
+	f.StringVarP(&dependenciesCmdParams.dockerfile, "dockerfile", "d", "", "the path of the Dockerfile to Dockument")
+	f.StringVarP(&dependenciesCmdParams.imageName, "image", "i", "", "the name of the image to fetch labels from")
 
 	return dockerCmd
 }
 func (d *dependenciesCmd) run() error {
 	if len(d.dockerfile) != 0 {
-		return printDependencies(d.dockerfile)
+		return printDependencies(d.dockerfile, "file")
 	}
 
+	if len(d.imageName) != 0 {
+		return printDependencies(d.imageName, "image")
+	}
 	return errors.New(utils.ColorString("red", "Please specfiy a path for the dockerfile to Dockument"))
 
 }
 
-func printDependencies(dockerfile string) error {
-	dependencies, err := labels.GetDepenedencies(dockerfile)
+func printDependencies(name, inputType string) error {
+	var dependencies *labels.Dependencies
+	var err error
+
+	switch inputType {
+	case "file":
+		dependencies, err = labels.GetDepenedencies(name)
+	case "image":
+		dependencies, err = labels.GetImageDepenedencies(name)
+	}
+
 	for _, dependency := range *(dependencies) {
 		fmt.Printf(utils.ColorString("blue", "### Dependency %s ### \n"), strings.ToUpper(dependency.Name))
 		fmt.Printf("	%s: %s \n", utils.ColorString("green", "Application"), dependency.Name)

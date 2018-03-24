@@ -68,11 +68,13 @@ func CreateDockument(dockerfile, dockumentPath string) {
 		log.Fatalf("Failed to retrieve resources, error: %s", err.Error())
 	}
 
+	// Get tag labels
 	tags, err := labels.GetTags(dockerfile)
 	if err != nil {
 		log.Fatalf("Failed to retrieve tags, error: %s", err.Error())
 	}
 
+	// Get Misc labels
 	others, err := labels.GetOtherTags(dockerfile)
 	if err != nil {
 		log.Fatalf("Failed to retrieve tags, error: %s", err.Error())
@@ -86,6 +88,7 @@ func CreateDockument(dockerfile, dockumentPath string) {
 		Tags:         tags,
 		Others:       others,
 	}
+
 	tplDockument.ExecuteTemplate(f, "dockument", templateData)
 }
 
