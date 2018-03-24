@@ -77,6 +77,7 @@ func CreateDockument(dockerfile, dockumentPath string) {
 	if err != nil {
 		log.Fatalf("Failed to retrieve tags, error: %s", err.Error())
 	}
+
 	templateData := dockumentTemplateParams{
 		Dependencies: deps,
 		Envs:         envs,
