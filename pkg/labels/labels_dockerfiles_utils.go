@@ -103,7 +103,7 @@ func fetchLabelsFor(labelType string, labelMap map[string]string) (map[string]st
 	fetchedLabelsToReturn := map[string]string{}
 	for key, value := range labelMap {
 		switch labelType {
-		case "DEPENDENCY":
+		case DEPENDENCY:
 			r, err := regexp.Compile(`^api.DEPENDENCY.*$`)
 			if err != nil {
 				return nil, err
@@ -111,7 +111,7 @@ func fetchLabelsFor(labelType string, labelMap map[string]string) (map[string]st
 			if r.MatchString(key) == true {
 				fetchedLabelsToReturn[key] = value
 			}
-		case "ENVS":
+		case ENVS:
 			r, err := regexp.Compile(`^api.ENV.*$`)
 			if err != nil {
 				return nil, err
@@ -119,7 +119,7 @@ func fetchLabelsFor(labelType string, labelMap map[string]string) (map[string]st
 			if r.MatchString(key) == true {
 				fetchedLabelsToReturn[key] = value
 			}
-		case "EXPOSED":
+		case EXPOSED:
 			r, err := regexp.Compile(`^api.EXPOSE.*$`)
 			if err != nil {
 				return nil, err
@@ -127,7 +127,7 @@ func fetchLabelsFor(labelType string, labelMap map[string]string) (map[string]st
 			if r.MatchString(key) == true {
 				fetchedLabelsToReturn[key] = value
 			}
-		case "RESOURCES":
+		case RESOURCES:
 			r, err := regexp.Compile(`^api.RESOURCES.*$`)
 			if err != nil {
 				return nil, err
@@ -135,8 +135,42 @@ func fetchLabelsFor(labelType string, labelMap map[string]string) (map[string]st
 			if r.MatchString(key) == true {
 				fetchedLabelsToReturn[key] = value
 			}
-		case "TAGS":
+		case TAGS:
 			r, err := regexp.Compile(`^api.TAGS.*$`)
+			if err != nil {
+				return nil, err
+			}
+			if r.MatchString(key) == true {
+				fetchedLabelsToReturn[key] = value
+			}
+		case COMMAND_TESTS:
+			r, err := regexp.Compile(`^api.TEST.command.*$`)
+			if err != nil {
+				return nil, err
+			}
+			if r.MatchString(key) == true {
+				fetchedLabelsToReturn[key] = value
+			}
+		case FILE_CONTENT_TESTS:
+			r, err := regexp.Compile(`^api.TEST.fileContent.*$`)
+			if err != nil {
+				return nil, err
+			}
+			if r.MatchString(key) == true {
+				fetchedLabelsToReturn[key] = value
+			}
+
+		case FILE_EXISTENCE_TESTS:
+			r, err := regexp.Compile(`^api.TEST.fileExistence.*$`)
+			if err != nil {
+				return nil, err
+			}
+			if r.MatchString(key) == true {
+				fetchedLabelsToReturn[key] = value
+			}
+
+		case METADATA_TESTS:
+			r, err := regexp.Compile(`^api.TEST.metadata.*$`)
 			if err != nil {
 				return nil, err
 			}
@@ -159,12 +193,16 @@ func fetchOthers(labelMap map[string]string) (Others, error) {
 }
 
 func keyMatchesPatterns(keyToMatch string) bool {
-	//TODO handle errors correctly
+	//TODO: handle errors correctly
 	rDep, _ := regexp.Compile(`^api.DEPENDENCY.*$`)
 	rEnv, _ := regexp.Compile(`^api.ENV.*$`)
 	rExpose, _ := regexp.Compile(`^api.EXPOSE.*$`)
 	rResources, _ := regexp.Compile(`^api.RESOURCES.*$`)
 	rTags, _ := regexp.Compile(`^api.TAGS.*$`)
+	rCommandTests, _ := regexp.Compile(`^api.TEST.command.*$`)
+	rFileContentTests, _ := regexp.Compile(`^api.TEST.fileContent.*$`)
+	rFileExistenceTests, _ := regexp.Compile(`^api.TEST.fileExistence.*$`)
+	rMetadataTests, _ := regexp.Compile(`^api.TEST.metadata.*$`)
 
 	if rDep.MatchString(keyToMatch) {
 		return true
@@ -178,11 +216,21 @@ func keyMatchesPatterns(keyToMatch string) bool {
 	if rResources.MatchString(keyToMatch) {
 		return true
 	}
-
 	if rTags.MatchString(keyToMatch) {
 		return true
 	}
-
+	if rCommandTests.MatchString(keyToMatch) {
+		return true
+	}
+	if rFileContentTests.MatchString(keyToMatch) {
+		return true
+	}
+	if rFileExistenceTests.MatchString(keyToMatch) {
+		return true
+	}
+	if rMetadataTests.MatchString(keyToMatch) {
+		return true
+	}
 	return false
 
 }

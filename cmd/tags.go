@@ -12,7 +12,7 @@ import (
 )
 
 var tagsCmdDesc = `
-This command is used to fetch tags out of Dockerfiles Dockerfiles`
+This command is used to fetch tags out of Dockerfiles or images`
 
 type tagsCmd struct {
 	dockerfile string

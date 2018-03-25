@@ -9,7 +9,7 @@ import (
 )
 
 var allCmdDesc = `
-This command is used to fetch all the important DOCKument labels out of Dockerfiles Dockerfiles`
+This command is used to fetch all the important DOCKument labels out of Dockerfiles or images`
 
 type allCmd struct {
 	dockerfile string

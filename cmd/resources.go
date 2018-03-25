@@ -12,7 +12,7 @@ import (
 )
 
 var resourcesCmdDesc = `
-This command is used to fetch resources out of Dockerfiles Dockerfiles`
+This command is used to fetch resources out of Dockerfiles or images`
 
 type resourcesCmd struct {
 	dockerfile string

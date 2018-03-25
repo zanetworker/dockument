@@ -28,6 +28,18 @@ const (
 
 	// TAGS the extra tags used for our images
 	TAGS = "TAGS"
+
+	//COMMAND_TESTS command tests
+	COMMAND_TESTS = "COMMAND_TESTS"
+
+	//FILE_EXISTENCE_TESTS file existence tests
+	FILE_EXISTENCE_TESTS = "FILE_EXISTENCE_TESTS"
+
+	//FILE_CONTENT_TESTS file content tests
+	FILE_CONTENT_TESTS = "FILE_CONTENT_TESTS"
+
+	//METADATA_TESTS meta data tests
+	METADATA_TESTS = "METADATA_TESTS"
 )
 
 //GetDepenedencies fetch the container dependencies from the Dockerfile
@@ -51,7 +63,7 @@ func GetDepenedencies(dockerfile string) (*Dependencies, error) {
 		log.Error(err.Error())
 	}
 
-	//TODO improve or decouple validation
+	//TODO: improve or decouple validation
 	if !valid {
 		log.Warn("your dependencies are not in a valid json format thus can't be used as is")
 	}
@@ -59,9 +71,65 @@ func GetDepenedencies(dockerfile string) (*Dependencies, error) {
 	return dockerfileDependencies, nil
 }
 
+//GetCommandTests fetch the container dependencies from the Dockerfile
+func GetCommandTests(dockerfile string) (*CommandTests, error) {
+	labels, err := getLabels(dockerfile)
+	if err != nil {
+		return nil, err
+	}
+
+	labelsToReturn, err := fetchLabelsFor(COMMAND_TESTS, labels)
+	if err != nil {
+		return nil, err
+	}
+
+	dockerfileCommandTests := parseCommandTests(labelsToReturn)
+
+	// Make sure that the dependencies conform with the schema
+	json, _ := json.Marshal(dockerfileCommandTests)
+	valid, err := validateMyObjectWithSchema("commandTests.json", string(json), "raw")
+	if err != nil {
+		log.Error(err.Error())
+	}
+
+	//TODO improve or decouple validation
+	if !valid {
+		log.Warn("your commandTests are not in a valid json format thus can't be used as is")
+	}
+
+	return dockerfileCommandTests, nil
+}
+
+//GetFileExistenceTests fetch the container dependencies from the Dockerfile
+func GetFileExistenceTests(dockerfile string) (*FileExistenceTests, error) {
+	labels, err := getLabels(dockerfile)
+	if err != nil {
+		return nil, err
+	}
+
+	labelsToReturn, err := fetchLabelsFor(FILE_EXISTENCE_TESTS, labels)
+	if err != nil {
+		return nil, err
+	}
+	dockerfileFETests := parseFileExistenceTests(labelsToReturn)
+
+	// Make sure that the dependencies conform with the schema
+	json, _ := json.Marshal(dockerfileFETests)
+	valid, err := validateMyObjectWithSchema("commandTests.json", string(json), "raw")
+	if err != nil {
+		log.Error(err.Error())
+	}
+
+	//TODO improve or decouple validation
+	if !valid {
+		log.Warn("your File Existence Tests are not in a valid json format thus can't be used as is")
+	}
+
+	return dockerfileFETests, nil
+}
+
 //GetEnvs fetch cotnainer environment variables from the Dockerfile
 func GetEnvs(dockerfile string) (*Envs, error) {
-	//TODO
 	labels, err := getLabels(dockerfile)
 	if err != nil {
 		return nil, err
@@ -90,7 +158,6 @@ func GetEnvs(dockerfile string) (*Envs, error) {
 
 //GetResources fetch the container resources from the Dockerfile
 func GetResources(dockerfile string) (*Resources, error) {
-	//TODO
 	labels, err := getLabels(dockerfile)
 	if err != nil {
 		return nil, err

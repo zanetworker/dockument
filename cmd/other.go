@@ -12,7 +12,7 @@ import (
 )
 
 var otherCmdDesc = `
-This command is used to fetch all other non-DOCKument labels out of Dockerfiles Dockerfiles`
+This command is used to fetch all other non-DOCKument labels out of Dockerfiles or images`
 
 type otherCmd struct {
 	dockerfile string

@@ -12,7 +12,7 @@ import (
 )
 
 var envsCmdDesc = `
-This command is used to fetch important ENVs out of Dockerfiles Dockerfiles`
+This command is used to fetch important ENVs out of Dockerfiles or images`
 
 type envsCmd struct {
 	dockerfile string

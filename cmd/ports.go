@@ -12,7 +12,7 @@ import (
 )
 
 var portsCmdDesc = `
-This command is used to fetch exposed ports out of Dockerfiles Dockerfiles`
+This command is used to fetch exposed ports out of Dockerfiles or images`
 
 type portsCmd struct {
 	dockerfile string

@@ -12,7 +12,7 @@ import (
 )
 
 var dependenciesCmdDesc = `
-This command is used to fetch dependencies out of Dockerfiles Dockerfiles`
+This command is used to fetch dependencies out of Dockerfiles or images`
 
 type dependenciesCmd struct {
 	dockerfile string

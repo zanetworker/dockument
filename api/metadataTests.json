@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "metaDataTests",
+	"type": "array",
+	"items": {
+		"title": "metaDataTest",
+		"type": "object",
+		"properties": {
+			"env": {
+				"type": "string"
+			},
+			"exposedPorts": {
+				"type": "string"
+			},
+			"volumes": {
+				"type": "string"
+			},
+			"entrypoint": {
+				"type": "string"
+			},
+			"cmd": {
+				"type": "string"
+			},
+			"workdir": {
+				"type": "string"
+			}
+		}
+	}	
+}
+
+
+
+
+

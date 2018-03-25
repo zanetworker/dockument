@@ -79,6 +79,7 @@ func newRootCmd(args []string) *cobra.Command {
 		newEnvsCmd(out),
 		newAllCmd(out),
 		newOtherCmd(out),
+		newTestsCmd(out),
 		newVersionCmd(out),
 	)
 

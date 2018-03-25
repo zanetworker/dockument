@@ -32,6 +32,63 @@ func parseDependencies(dependencyLabels map[string]string) *Dependencies {
 	return &dependencies
 }
 
+func parseCommandTests(commandTestLabels map[string]string) *CommandTests {
+	commandTests := CommandTests{}
+	for _, commandTestMap := range divideMapByKey(commandTestLabels) {
+		commandTest := CommandTest{}
+		for commandTestsLabel, value := range commandTestMap {
+			commandTestsLabelStrings := strings.Split(commandTestsLabel, ".")
+			if len(commandTestsLabelStrings) > 3 {
+				commandTestParam := commandTestsLabelStrings[3]
+				switch commandTestParam {
+				case "name":
+					commandTest.Name = value
+				case "command":
+					commandTest.Command = value
+				case "args":
+					//TODO parse ports correctly
+					commandTest.Args = []string{value}
+				case "expectedOutput":
+					commandTest.ExpectedOutput = value
+				case "expectedError":
+					commandTest.ExpectedError = value
+				case "excludedOutput":
+					commandTest.ExcludedOutput = value
+				case "excludedError":
+					commandTest.ExcludedError = value
+				}
+			}
+		}
+		commandTests = append(commandTests, commandTest)
+	}
+	return &commandTests
+}
+
+func parseFileExistenceTests(fileExistenceTestsLabels map[string]string) *FileExistenceTests {
+	fileExistenceTests := FileExistenceTests{}
+	for _, fileExistenceTestsMap := range divideMapByKey(fileExistenceTestsLabels) {
+		fileExistenceTest := FileExistenceTest{}
+		for fileExistenceTestsLabel, value := range fileExistenceTestsMap {
+			fileExistenceTestsLabelStrings := strings.Split(fileExistenceTestsLabel, ".")
+			if len(fileExistenceTestsLabelStrings) > 3 {
+				fileExistenceTestParam := fileExistenceTestsLabelStrings[3]
+				switch fileExistenceTestParam {
+				case "name":
+					fileExistenceTest.Name = value
+				case "path":
+					fileExistenceTest.Path = value
+				case "shouldExist":
+					fileExistenceTest.ShouldExist = value
+				case "permissions":
+					fileExistenceTest.Permissions = value
+				}
+			}
+		}
+		fileExistenceTests = append(fileExistenceTests, fileExistenceTest)
+	}
+	return &fileExistenceTests
+}
+
 func parseEnvs(envLabels map[string]string) *Envs {
 	envs := Envs{}
 	for _, envMap := range divideMapByKey(envLabels) {

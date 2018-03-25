@@ -12,6 +12,34 @@ LABEL api.TAGS.go="1.9"
 LABEL api.RESOURCES.Memory="3gb"\
       api.RESOURCES.CPU="2"
 
+###  Describe container tests based on container structure tests from google
+LABEL api.TEST.command=""\
+      api.TEST.command.name="apt-get upgrade"\
+      api.TEST.command.command="apt-get"\
+      api.TEST.command.args="-qqs, upgrade"\
+      api.TEST.command.expectedOutput="true"\
+      api.TEST.command.expectedError=""\
+      api.TEST.command.excludedOutput=""\
+      api.TEST.command.excludedError=""
+
+LABEL api.TEST.fileExistence=""\
+      api.TEST.fileExistence.name="test"\
+      api.TEST.fileExistence.path="asdas"\
+      api.TEST.fileExistence.shouldExist="asd"\
+      api.TEST.fileExistence.permissions="asd"
+
+LABEL api.TEST.fileContent=""\
+      api.TEST.fileContent.name=""\
+      api.TEST.fileContent.path=""\
+      api.TEST.fileContent.expectedContents=""\
+      api.TEST.fileContent.excludedContents=""
+
+LABEL api.TEST.metadata=""\
+      api.TEST.metadata.env="foo:baz"\
+      api.TEST.metadata.exposedPorts=""\
+      api.TEST.metadata.cmd=""\
+      api.TEST.metadata.workdir=""
+
 ###  Describe container dependencies
 LABEL api.DEPENDENCY.redis=""\
       api.DEPENDENCY.redis.image="redis:latest"\

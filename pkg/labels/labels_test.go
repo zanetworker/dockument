@@ -14,15 +14,19 @@ func TestGetDependencies(t *testing.T) {
 }
 
 func TestGetEnvVars(t *testing.T) {
+	//TODO:
 }
 
 func TestGetExposedPorts(t *testing.T) {
+	//TODO:
 }
 
 func TestGetTags(t *testing.T) {
+	//TODO:
 }
 
 func TestGetAllLabels(t *testing.T) {
+	//TODO:
 }
 
 // func TestVersion(t *testing.T) {
