@@ -34,7 +34,7 @@ func GetImageDepenedencies(imageName string) (*Dependencies, error) {
 
 	//TODO improve or decouple validation
 	if !valid {
-		log.Warn("your the dependencies are not in a valid json format thus can't be used as is")
+		log.Warn("your dependencies are not in a valid json format thus can't be used as is")
 	}
 
 	return imageDependencies, nil
@@ -70,7 +70,6 @@ func GetImageEnvs(imageName string) (*Envs, error) {
 
 //GetImageResources fetch the container resources from the docker image
 func GetImageResources(imageName string) (*Resources, error) {
-	//TODO
 	labels, err := getImageLabels(imageName)
 	if err != nil {
 		return nil, err

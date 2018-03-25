@@ -38,10 +38,10 @@ func newEnvsCmd(out io.Writer) *cobra.Command {
 }
 func (d *envsCmd) run() error {
 	if len(d.dockerfile) != 0 {
-		return printEnvs(d.dockerfile, "file")
+		return printEnvs(d.dockerfile, FILE)
 	}
 	if len(d.imageName) != 0 {
-		return printEnvs(d.imageName, "image")
+		return printEnvs(d.imageName, IMAGE)
 
 	}
 	return errors.New(utils.ColorString("red", "Please specfiy a path for the dockerfile to Dockument"))
@@ -53,9 +53,9 @@ func printEnvs(name, inputType string) error {
 	var err error
 
 	switch inputType {
-	case "file":
+	case FILE:
 		envs, err = labels.GetEnvs(name)
-	case "image":
+	case IMAGE:
 		envs, err = labels.GetImageEnvs(name)
 
 	}

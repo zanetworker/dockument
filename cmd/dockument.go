@@ -40,6 +40,13 @@ Environment:
 $DOCKUMENT_HOME          set an alternative DOCKument location for files. By default, these are stored in ~/.dockument
 `
 
+const (
+	//FILE is used to tell dockument to fetch labels from a Dockerfile
+	FILE = "file"
+	//IMAGE is used to tell dockument to fetch labels from a Docker image
+	IMAGE = "image"
+)
+
 var dockumentLogo = `
 ######  #######  #####  #    #                                   
 #     # #     # #     # #   #  #    # #    # ###### #    # ##### 

@@ -38,10 +38,10 @@ func newPortsCmd(out io.Writer) *cobra.Command {
 }
 func (d *portsCmd) run() error {
 	if len(d.dockerfile) != 0 {
-		return printPorts(d.dockerfile, "file")
+		return printPorts(d.dockerfile, FILE)
 	}
 	if len(d.imageName) != 0 {
-		return printPorts(d.imageName, "image")
+		return printPorts(d.imageName, IMAGE)
 	}
 	return errors.New(utils.ColorString("red", "Please specfiy a path for the dockerfile to Dockument"))
 
@@ -52,9 +52,9 @@ func printPorts(name, inputType string) error {
 	var err error
 
 	switch inputType {
-	case "file":
+	case FILE:
 		ports, err = labels.GetExposedPorts(name)
-	case "image":
+	case IMAGE:
 		ports, err = labels.GetImageExposedPorts(name)
 	}
 

@@ -38,11 +38,11 @@ func newDependenciesCmd(out io.Writer) *cobra.Command {
 }
 func (d *dependenciesCmd) run() error {
 	if len(d.dockerfile) != 0 {
-		return printDependencies(d.dockerfile, "file")
+		return printDependencies(d.dockerfile, FILE)
 	}
 
 	if len(d.imageName) != 0 {
-		return printDependencies(d.imageName, "image")
+		return printDependencies(d.imageName, IMAGE)
 	}
 	return errors.New(utils.ColorString("red", "Please specfiy a path for the dockerfile to Dockument"))
 
@@ -53,9 +53,9 @@ func printDependencies(name, inputType string) error {
 	var err error
 
 	switch inputType {
-	case "file":
+	case FILE:
 		dependencies, err = labels.GetDepenedencies(name)
-	case "image":
+	case IMAGE:
 		dependencies, err = labels.GetImageDepenedencies(name)
 	}
 
