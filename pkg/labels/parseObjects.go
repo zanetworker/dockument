@@ -16,7 +16,7 @@ func parseDependencies(dependencyLabels map[string]string) *Dependencies {
 				case "image":
 					dependency.Image = value
 				case "port":
-					//TODO parse ports correctly
+					//TODO: parse ports correctly
 					dependency.Ports = []string{value}
 				case "about":
 					dependency.About = value
@@ -87,6 +87,60 @@ func parseFileExistenceTests(fileExistenceTestsLabels map[string]string) *FileEx
 		fileExistenceTests = append(fileExistenceTests, fileExistenceTest)
 	}
 	return &fileExistenceTests
+}
+
+func parseFileContentTests(fileContentTestsLabels map[string]string) *FileContentTests {
+	fileContentTests := FileContentTests{}
+	for _, fileContentTestsMap := range divideMapByKey(fileContentTestsLabels) {
+		fileContentTest := FileContentTest{}
+		for fileContentTestsLabel, value := range fileContentTestsMap {
+			fileContentTestsLabelStrings := strings.Split(fileContentTestsLabel, ".")
+			if len(fileContentTestsLabelStrings) > 3 {
+				fileContentTestParam := fileContentTestsLabelStrings[3]
+				switch fileContentTestParam {
+				case "name":
+					fileContentTest.Name = value
+				case "path":
+					fileContentTest.Path = value
+				case "expectedContents":
+					fileContentTest.ExpectedContents = value
+				case "excludedContents":
+					fileContentTest.ExcludedContents = value
+				}
+			}
+		}
+		fileContentTests = append(fileContentTests, fileContentTest)
+	}
+	return &fileContentTests
+}
+
+func parseMetadataTests(metadataTestsLabels map[string]string) *MetadataTests {
+	metadataTests := MetadataTests{}
+	for _, metadataTestsMap := range divideMapByKey(metadataTestsLabels) {
+		metadataTest := MetadataTest{}
+		for metadataTestsLabel, value := range metadataTestsMap {
+			metadataTestLabelStrings := strings.Split(metadataTestsLabel, ".")
+			if len(metadataTestLabelStrings) > 3 {
+				metadataTestsParam := metadataTestLabelStrings[3]
+				switch metadataTestsParam {
+				case "env":
+					metadataTest.Env = value
+				case "exposedPorts":
+					metadataTest.ExposedPorts = value
+				case "volumes":
+					metadataTest.Volumes = value
+				case "entrypoint":
+					metadataTest.EntryPoint = value
+				case "cmd":
+					metadataTest.Cmd = value
+				case "workdir":
+					metadataTest.Workdir = value
+				}
+			}
+		}
+		metadataTests = append(metadataTests, metadataTest)
+	}
+	return &metadataTests
 }
 
 func parseEnvs(envLabels map[string]string) *Envs {

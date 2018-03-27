@@ -41,6 +41,7 @@ func (d *allCmd) run() error {
 		printEnvs(d.dockerfile, FILE)
 		printResources(d.dockerfile, FILE)
 		printTags(d.dockerfile, FILE)
+		printTests(d.dockerfile, FILE)
 		printOthers(d.dockerfile, FILE)
 		return nil
 	}
@@ -51,14 +52,9 @@ func (d *allCmd) run() error {
 		printEnvs(d.imageName, IMAGE)
 		printResources(d.imageName, IMAGE)
 		printTags(d.imageName, IMAGE)
+		printTests(d.imageName, IMAGE)
 		printOthers(d.imageName, IMAGE)
 		return nil
 	}
 	return errors.New(utils.ColorString("red", "Please specfiy a path for the dockerfile to Dockument"))
-}
-
-func returnIfErr(err error) {
-	if err != nil {
-
-	}
 }

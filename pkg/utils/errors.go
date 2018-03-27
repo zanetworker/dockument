@@ -31,3 +31,4 @@ func NewDuplicaServiceIPError(message string) *DuplicaServiceIPError {
 func (e *DuplicaServiceIPError) Error() string {
 	return e.message
 }
+

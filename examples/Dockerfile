@@ -29,16 +29,17 @@ LABEL api.TEST.fileExistence=""\
       api.TEST.fileExistence.permissions="asd"
 
 LABEL api.TEST.fileContent=""\
-      api.TEST.fileContent.name=""\
-      api.TEST.fileContent.path=""\
-      api.TEST.fileContent.expectedContents=""\
-      api.TEST.fileContent.excludedContents=""
+      api.TEST.fileContent.name="Debian Sources"\
+      api.TEST.fileContent.path="/etc/apt/sources.list"\
+      api.TEST.fileContent.expectedContents="['.*httpredir\\.debian\\.org.*']"\
+      api.TEST.fileContent.excludedContents="['.*gce_debian_mirror.*']"
 
 LABEL api.TEST.metadata=""\
       api.TEST.metadata.env="foo:baz"\
-      api.TEST.metadata.exposedPorts=""\
-      api.TEST.metadata.cmd=""\
-      api.TEST.metadata.workdir=""
+      api.TEST.metadata.exposedPorts="8080, 2345"\
+      api.TEST.metadata.volumes="/test"\
+      api.TEST.metadata.cmd="/bin/bash"\
+      api.TEST.metadata.workdir="/app"
 
 ###  Describe container dependencies
 LABEL api.DEPENDENCY.redis=""\

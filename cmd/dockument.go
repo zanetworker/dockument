@@ -99,6 +99,13 @@ func printLogo(logoToPrint string) {
 	}
 }
 
+func returnWithError(err error) error {
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func runDockument(cmd *cobra.Command, args []string) {
 	printLogo(dockumentLogo)
 	if len(args) == 0 {

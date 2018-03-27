@@ -50,29 +50,36 @@ func (d *testsCmd) run() error {
 }
 
 func printTests(name, inputType string) error {
-	var commandTests *labels.CommandTests
-	var fexTests *labels.FileExistenceTests
+	switch inputType {
+	case FILE:
+		printCommandTests(name, FILE)
+		printFileExistenceTests(name, FILE)
+		printMetadataTests(name, FILE)
+		printFileContentTests(name, FILE)
+	case IMAGE:
+		printCommandTests(name, IMAGE)
+		printFileExistenceTests(name, IMAGE)
+		printMetadataTests(name, IMAGE)
+		printFileContentTests(name, IMAGE)
+	}
 
+	return nil
+}
+
+func printCommandTests(name, inputType string) error {
+	var commandTests *labels.CommandTests
 	var err error
 
 	switch inputType {
 	case FILE:
 		commandTests, err = labels.GetCommandTests(name)
-		fexTests, err = labels.GetFileExistenceTests(name)
 	case IMAGE:
-		commandTests, err = labels.GetCommandTests(name)
-		fexTests, err = labels.GetFileExistenceTests(name)
+		commandTests, err = labels.GetImageCommandTests(name)
 	}
 
-	printCommandTests(commandTests)
-	printFileExistenceTests(fexTests)
-	return err
-}
-
-func printCommandTests(cmdTests *labels.CommandTests) {
 	nilCommandTests := &labels.CommandTests{}
-	if !reflect.DeepEqual(nilCommandTests, cmdTests) {
-		for _, test := range *(cmdTests) {
+	if !reflect.DeepEqual(nilCommandTests, commandTests) {
+		for _, test := range *(commandTests) {
 			fmt.Printf(utils.ColorString("blue", "### Command Test %s ### \n"), strings.ToUpper(test.Name))
 			fmt.Printf("	%s: %s \n", utils.ColorString("green", "Name"), test.Name)
 			fmt.Printf("	%s: %s\n", utils.ColorString("green", "Command"), test.Command)
@@ -83,9 +90,21 @@ func printCommandTests(cmdTests *labels.CommandTests) {
 			fmt.Printf("	%s: %s\n", utils.ColorString("green", "Excluded Error"), test.ExcludedError)
 		}
 	}
+
+	return err
 }
 
-func printFileExistenceTests(fexTests *labels.FileExistenceTests) {
+func printFileExistenceTests(name, inputType string) error {
+	var fexTests *labels.FileExistenceTests
+	var err error
+
+	switch inputType {
+	case FILE:
+		fexTests, err = labels.GetFileExistenceTests(name)
+	case IMAGE:
+		fexTests, err = labels.GetImageFileExistenceTests(name)
+	}
+
 	nilFexTests := &labels.FileExistenceTests{}
 	if !reflect.DeepEqual(nilFexTests, fexTests) {
 		for _, test := range *(fexTests) {
@@ -95,4 +114,59 @@ func printFileExistenceTests(fexTests *labels.FileExistenceTests) {
 			fmt.Printf("	%s: %s\n", utils.ColorString("green", "Permissions"), test.Permissions)
 		}
 	}
+
+	return err
+}
+
+func printMetadataTests(name, inputType string) error {
+	var metadataTests *labels.MetadataTests
+	var err error
+
+	switch inputType {
+	case FILE:
+		metadataTests, err = labels.GetMetadataTests(name)
+	case IMAGE:
+		metadataTests, err = labels.GetImageMetadataTests(name)
+
+	}
+
+	nilMetaTests := &labels.MetadataTests{}
+	if !reflect.DeepEqual(nilMetaTests, metadataTests) {
+		for _, test := range *(metadataTests) {
+			fmt.Printf(utils.ColorString("blue", "### Metadata Tests Tests ### \n"))
+			fmt.Printf("	%s: %s \n", utils.ColorString("green", "Envs"), test.Env)
+			fmt.Printf("	%s: %s\n", utils.ColorString("green", "Volumes"), test.Volumes)
+			fmt.Printf("	%s: %s\n", utils.ColorString("green", "ExposedPorts"), test.ExposedPorts)
+			fmt.Printf("	%s: %s\n", utils.ColorString("green", "Entry Point"), test.EntryPoint)
+			fmt.Printf("	%s: %s\n", utils.ColorString("green", "CMD"), test.Cmd)
+			fmt.Printf("	%s: %s\n", utils.ColorString("green", "Workdir"), test.Workdir)
+
+		}
+	}
+	return err
+}
+
+func printFileContentTests(name, inputType string) error {
+	var fileContentTests *labels.FileContentTests
+	var err error
+
+	switch inputType {
+	case FILE:
+		fileContentTests, err = labels.GetFileContentTests(name)
+	case IMAGE:
+		fileContentTests, err = labels.GetImageFileContentTests(name)
+
+	}
+
+	nilMetaTests := &labels.FileContentTests{}
+	if !reflect.DeepEqual(nilMetaTests, fileContentTests) {
+		for _, test := range *(fileContentTests) {
+			fmt.Printf(utils.ColorString("blue", "### File Content Tests %s ### \n"), strings.ToUpper(test.Name))
+			fmt.Printf("	%s: %s \n", utils.ColorString("green", "Path"), test.Path)
+			fmt.Printf("	%s: %s\n", utils.ColorString("green", "Expected Contents"), test.ExpectedContents)
+			fmt.Printf("	%s: %s\n", utils.ColorString("green", "Exluded Contents"), test.ExcludedContents)
+
+		}
+	}
+	return err
 }

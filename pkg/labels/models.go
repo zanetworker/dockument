@@ -16,6 +16,7 @@ type Dependencies []Dependency
 type CommandTest struct {
 	Name           string   `json:"name,omitempty"`
 	Command        string   `json:"command,omitempty"`
+	Setup          string   `json:"setup,omitempty"`
 	Args           []string `json:"args,omitempty"`
 	About          string   `json:"about,omitempty"`
 	ExpectedOutput string   `json:"expectedOutput,omitempty"`

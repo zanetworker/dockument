@@ -40,6 +40,118 @@ func GetImageDepenedencies(imageName string) (*Dependencies, error) {
 	return imageDependencies, nil
 }
 
+//GetImageCommandTests fetch the command tests from the container image
+func GetImageCommandTests(imageName string) (*CommandTests, error) {
+	labels, err := getImageLabels(imageName)
+	if err != nil {
+		return nil, err
+	}
+
+	labelsToReturn, err := fetchLabelsFor(COMMAND_TESTS, labels)
+	if err != nil {
+		return nil, err
+	}
+
+	imageCommandTests := parseCommandTests(labelsToReturn)
+
+	// Make sure that the dependencies conform with the schema
+	json, _ := json.Marshal(imageCommandTests)
+	valid, err := validateMyObjectWithSchema("commandTests.json", string(json), "raw")
+	if err != nil {
+		log.Error(err.Error())
+	}
+
+	//TODO improve or decouple validation
+	if !valid {
+		log.Warn("your Command Tests are not in a valid json format thus can't be used as is")
+	}
+
+	return imageCommandTests, nil
+}
+
+//GetImageFileExistenceTests fetch the container file existence tests from the container Image
+func GetImageFileExistenceTests(imageName string) (*FileExistenceTests, error) {
+	labels, err := getImageLabels(imageName)
+	if err != nil {
+		return nil, err
+	}
+
+	labelsToReturn, err := fetchLabelsFor(FILE_EXISTENCE_TESTS, labels)
+	if err != nil {
+		return nil, err
+	}
+	imageFETests := parseFileExistenceTests(labelsToReturn)
+
+	// Make sure that the dependencies conform with the schema
+	json, _ := json.Marshal(imageFETests)
+	valid, err := validateMyObjectWithSchema("fileExistenceTests.json", string(json), "raw")
+	if err != nil {
+		log.Error(err.Error())
+	}
+
+	//TODO improve or decouple validation
+	if !valid {
+		log.Warn("your File Existence Tests are not in a valid json format thus can't be used as is")
+	}
+
+	return imageFETests, nil
+}
+
+//GetImageMetadataTests fetches the image metadata tests from the container image
+func GetImageMetadataTests(imageName string) (*MetadataTests, error) {
+	labels, err := getImageLabels(imageName)
+	if err != nil {
+		return nil, err
+	}
+	labelsToReturn, err := fetchLabelsFor(METADATA_TESTS, labels)
+	if err != nil {
+		return nil, err
+	}
+	imageMetaTests := parseMetadataTests(labelsToReturn)
+
+	// Make sure that the dependencies conform with the schema
+	json, _ := json.Marshal(imageMetaTests)
+	valid, err := validateMyObjectWithSchema("metadataTests.json", string(json), "raw")
+	if err != nil {
+		log.Error(err.Error())
+	}
+
+	//TODO improve or decouple validation
+	if !valid {
+		log.Warn("your Metadata Tests are not in a valid json format thus can't be used as is")
+	}
+
+	return imageMetaTests, nil
+}
+
+//GetImageFileContentTests fetches the me
+func GetImageFileContentTests(imageName string) (*FileContentTests, error) {
+	labels, err := getImageLabels(imageName)
+	if err != nil {
+		return nil, err
+	}
+
+	labelsToReturn, err := fetchLabelsFor(FILE_CONTENT_TESTS, labels)
+	if err != nil {
+		return nil, err
+	}
+	imageContentTests := parseFileContentTests(labelsToReturn)
+
+	// Make sure that the dependencies conform with the schema
+	json, _ := json.Marshal(imageContentTests)
+	valid, err := validateMyObjectWithSchema("fileContentTests.json", string(json), "raw")
+	if err != nil {
+		log.Error(err.Error())
+	}
+
+	//TODO improve or decouple validation
+	if !valid {
+		log.Warn("your File Content Tests are not in a valid json format thus can't be used as is")
+	}
+
+	return imageContentTests, nil
+}
+
 //GetImageEnvs fetch cotnainer environment variables from the docker image
 func GetImageEnvs(imageName string) (*Envs, error) {
 	labels, err := getImageLabels(imageName)
