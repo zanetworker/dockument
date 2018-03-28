@@ -20,7 +20,7 @@ func newAllCmd(out io.Writer) *cobra.Command {
 	allCmdParams := &allCmd{}
 	dockerCmd := &cobra.Command{
 		Use:   "all",
-		Short: "fetches all the important DOCKument labels from the Dockerfile",
+		Short: "fetches all the important DOCKument labels from the Dockerfile or Docker images",
 		Long:  allCmdDesc,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return allCmdParams.run()

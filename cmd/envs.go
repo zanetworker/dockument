@@ -23,7 +23,7 @@ func newEnvsCmd(out io.Writer) *cobra.Command {
 	envsCmdParams := &envsCmd{}
 	dockerCmd := &cobra.Command{
 		Use:   "envs",
-		Short: "fetches exposed envs from the Dockerfile",
+		Short: "fetches exposed envs from the Dockerfile or the Docker images",
 		Long:  envsCmdDesc,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return envsCmdParams.run()

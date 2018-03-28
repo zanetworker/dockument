@@ -23,7 +23,7 @@ func newPortsCmd(out io.Writer) *cobra.Command {
 	portsCmdParams := &portsCmd{}
 	dockerCmd := &cobra.Command{
 		Use:   "ports",
-		Short: "fetches exposed ports from the Dockerfile",
+		Short: "fetches exposed ports from the Dockerfile or Docker images",
 		Long:  portsCmdDesc,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return portsCmdParams.run()

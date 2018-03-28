@@ -24,7 +24,7 @@ func newTestsCmd(out io.Writer) *cobra.Command {
 	testsCmdParams := &testsCmd{}
 	dockerCmd := &cobra.Command{
 		Use:   "tests",
-		Short: "fetches tests from the Dockerfile",
+		Short: "fetches tests from the Dockerfile or Docker image",
 		Long:  testsCmdDesc,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return testsCmdParams.run()

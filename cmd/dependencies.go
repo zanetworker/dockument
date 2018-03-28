@@ -23,7 +23,7 @@ func newDependenciesCmd(out io.Writer) *cobra.Command {
 	dependenciesCmdParams := &dependenciesCmd{}
 	dockerCmd := &cobra.Command{
 		Use:   "deps",
-		Short: "fetches dependencies from the Dockerfile",
+		Short: "fetches dependencies from the Dockerfile or Docker image",
 		Long:  dependenciesCmdDesc,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return dependenciesCmdParams.run()

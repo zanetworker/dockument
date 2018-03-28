@@ -11,9 +11,9 @@ Below are the ports the should be exposed by your application:
 ### Port 1337
 
 - **Name**: 1337
-- **About**: "The main endpoint of this service."
-- **Scheme**: "tcp"
-- **Protocol**: "http"
+- **About**: The main endpoint of this service.
+- **Scheme**: tcp
+- **Protocol**: http
 
 
 
@@ -22,22 +22,22 @@ Below are the ports the should be exposed by your application:
  
 Below are your container application dependencies:
 
-### Dependency redis
-
-- **Name**: redis
-- **Image**: "redis:latest" (`docker pull "redis:latest"`)
-- **About**: "For caching results from OWM API."
-- **Ports**: ["6379"]
-- **Mandatory**: "true"
-
-
 ### Dependency rabbit
 
 - **Name**: rabbit
-- **Image**: "rabbit:latest" (`docker pull "rabbit:latest"`)
-- **About**: "The rabbit"
-- **Ports**: ["5271"]
-- **Mandatory**: "true"
+- **Image**: rabbit:latest (`docker pull rabbit:latest`)
+- **About**: The rabbit
+- **Ports**: [5271]
+- **Mandatory**: true
+
+
+### Dependency redis
+
+- **Name**: redis
+- **Image**: redis:latest (`docker pull redis:latest`)
+- **About**: For caching results from OWM API.
+- **Ports**: [6379]
+- **Mandatory**: true
 
 
 
@@ -47,13 +47,13 @@ Below are your container application dependencies:
  
 Below are your container application dependencies:
 
-### Command Test "apt-get upgrade"
+### Command Test apt-get upgrade
 
- - **Name**: "apt-get upgrade"
+ - **Name**: apt-get upgrade
  
- - **Command**: "apt-get"
- - **Args**: ["-qqs, upgrade"]
- - **Expected Output**: "true"
+ - **Command**: apt-get
+ - **Args**: [-qqs, upgrade]
+ - **Expected Output**: true
 
 
 
@@ -62,12 +62,12 @@ Below are your container application dependencies:
  
 Below are your container application dependencies:
 
-### File Content Test "Debian Sources"
+### File Content Test Debian Sources
 
- - **Name**: "Debian Sources"
- - **Path**: "/etc/apt/sources.list" 
- - **Expected Contents**: "['.*httpredir\\.debian\\.org.*']"
- - **Excluded Content**: "['.*gce_debian_mirror.*']"
+ - **Name**: Debian Sources
+ - **Path**: /etc/apt/sources.list 
+ - **Expected Contents**: ['.*httpredir\.debian\.org.*']
+ - **Excluded Content**: ['.*gce_debian_mirror.*']
 
 
 
@@ -75,12 +75,12 @@ Below are your container application dependencies:
  
 Below are your container application dependencies:
 
-### File Existence Test "test"
+### File Existence Test test
 
- - **Name**: "test"
- - **Path**: "asdas" 
- - **Should Exist**: "asd"
- - **With Permissions**: "asd"
+ - **Name**: test
+ - **Path**: asdas 
+ - **Should Exist**: asd
+ - **With Permissions**: asd
 
 
 
@@ -89,13 +89,13 @@ Below are your container application dependencies:
  
 Below are your container application dependencies:
 
-### Meta Data Tests
- - **Environment Variables**: "foo:baz"
- - **Exposed Ports**: "8080, 2345"
+### Meta Data Test
+ - **Environment Variables**: foo:baz
+ - **Exposed Ports**: 8080, 2345
  
- - **Cmd**: "/bin/bash"
- - **Workdir**: "/app"
- - **Volumes**: "/test"
+ - **Cmd**: /bin/bash
+ - **Workdir**: /app
+ - **Volumes**: /test
 
 
 
@@ -109,8 +109,8 @@ Below are some important Environment Variables:
 ### Env OPENWEATHERMAP_APIKEY
 
 - **Name**: OPENWEATHERMAP_APIKEY
-- **About**: "Access key for OpenWeatherMap. See http://openweathermap.org/appid for details."
-- **Mandatory**: "true"
+- **About**: Access key for OpenWeatherMap. See http://openweathermap.org/appid for details.
+- **Mandatory**: true
 
 
 
@@ -119,8 +119,8 @@ Below are some important Environment Variables:
   
   
 Resources required by your container application to run with reasonable performance: 
-- **CPU**: "2"
-- **Memory**: "3gb"
+- **CPU**: 2
+- **Memory**: 3gb
 
 
 
@@ -128,15 +128,15 @@ Resources required by your container application to run with reasonable performa
 ## Tags / Metadata
 
 Metadata and container tags:
-- **go**: "1.9"
+- **go**: 1.9
 
 
 
 ## Misc Labels
 
 Non-Standard DOCKument API labels:
-- **Health**: "test"
-- **Maintainer**: "Adel Zaalouk"
+- **Health**: test
+- **Maintainer**: Adel Zaalouk
 
 
 

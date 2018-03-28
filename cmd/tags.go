@@ -23,7 +23,7 @@ func newTagsCmd(out io.Writer) *cobra.Command {
 	tagCmdParams := &tagsCmd{}
 	dockerCmd := &cobra.Command{
 		Use:   "tags",
-		Short: "fetches tags from the Dockerfile",
+		Short: "fetches tags from the Dockerfile or Docker images",
 		Long:  tagsCmdDesc,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return tagCmdParams.run()

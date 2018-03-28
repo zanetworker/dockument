@@ -39,20 +39,20 @@ DOCKument Created!
 `
 
 var dockerCreateCmdDesc = `
-This command is used to DOCKument Dockerfiles`
+This command is used to DOCKument Dockerfiles & Docker Images`
 
 var defaultDockumentLocation = utils.GetDir("root")
 
 type dockerCreateCmd struct {
-	dockerfile  string
-	outLocation string
+	dockerfile, image string
+	outLocation       string
 }
 
 func newDockerCreateCmd(out io.Writer) *cobra.Command {
 	dockerCreateCmdParams := &dockerCreateCmd{}
 	dockerCmd := &cobra.Command{
 		Use:   "create",
-		Short: "create documentation for Dockerfiles",
+		Short: "create documentation for Dockerfiles or Docker images",
 		Long:  dockerCreateCmdDesc,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return dockerCreateCmdParams.run()
@@ -61,15 +61,25 @@ func newDockerCreateCmd(out io.Writer) *cobra.Command {
 
 	f := dockerCmd.Flags()
 
-	f.StringVar(&dockerCreateCmdParams.dockerfile, "dockerfile", "", "the path of the Dockerfile to Dockument")
+	f.StringVarP(&dockerCreateCmdParams.dockerfile, "dockerfile", "d", "", "the path of the Dockerfile to Dockument")
+	f.StringVarP(&dockerCreateCmdParams.image, "image", "i", "", "the path of the Dockerfile to Dockument")
 	f.StringVarP(&dockerCreateCmdParams.outLocation, "out", "o", defaultDockumentLocation, "the output location of documentation")
 
 	return dockerCmd
 }
 
 func (d *dockerCreateCmd) run() error {
-	commands.CreateDockument(d.dockerfile, d.outLocation)
-	log.Infof("Dockument created at ( %s )", d.outLocation)
+	if len(d.dockerfile) != 0 {
+		commands.CreateDockument(d.dockerfile, d.outLocation)
+		defer log.Infof("Dockument created for Dockerfile (%s) at ( %s )", d.dockerfile, d.outLocation)
+
+	}
+
+	if len(d.image) != 0 {
+		commands.CreateImageDockument(d.image, d.outLocation)
+		defer log.Infof("Dockument created for Docker Image (%s) at ( %s )", d.image, d.outLocation)
+
+	}
 	printLogo(thumbsUpLogo)
 	return nil
 }

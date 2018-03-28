@@ -23,7 +23,7 @@ func newResourcesCmd(out io.Writer) *cobra.Command {
 	resourcesCmdParams := &resourcesCmd{}
 	dockerCmd := &cobra.Command{
 		Use:   "resources",
-		Short: "fetches resources from the Dockerfile",
+		Short: "fetches resources from the Dockerfile or Docker images",
 		Long:  resourcesCmdDesc,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return resourcesCmdParams.run()

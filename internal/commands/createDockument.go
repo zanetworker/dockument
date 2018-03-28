@@ -126,10 +126,8 @@ func CreateDockument(dockerfile, dockumentPath string) {
 
 //CreateImageDockument creates the dockerfile dock-umentation
 func CreateImageDockument(imageName, dockumentPath string) {
-	checkAndCreatePath(dockumentPath)
-
-	validDockerfilePath := isValidPath(imageName)
-	if !validDockerfilePath {
+	validImageName := labels.ImageExists(imageName)
+	if !validImageName {
 		log.Fatalf("Could not create Dockument, image path  ( %s ) is invalid, please check command help", imageName)
 	}
 

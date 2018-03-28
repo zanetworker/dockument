@@ -23,7 +23,7 @@ func newOtherCmd(out io.Writer) *cobra.Command {
 	otherCmdParams := &otherCmd{}
 	dockerCmd := &cobra.Command{
 		Use:   "other",
-		Short: "fetch all other non-DOCKument labels out of Dockerfiles Dockerfile",
+		Short: "fetch all other non-DOCKument labels out of Dockerfiles or Docker images",
 		Long:  otherCmdDesc,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return otherCmdParams.run()

@@ -44,3 +44,26 @@ func containsImageName(imageRepoTags []string, requestedImage string) bool {
 	}
 	return false
 }
+
+//ImageExists checks if a certain image exists in the local repo
+func ImageExists(imageName string) bool {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	d, err := dockerclient.NewEnvClient()
+	if err != nil {
+		log.Fatalf("Failed to create docker socket, error: %s", err.Error())
+	}
+
+	images, err := d.ImageList(ctx, types.ImageListOptions{All: false})
+	if err != nil {
+		log.Fatalf("Failed to list docker images, error: %s", err.Error())
+	}
+
+	for _, image := range images {
+		if containsImageName(image.RepoTags, imageName) {
+			return true
+		}
+	}
+	return false
+}
