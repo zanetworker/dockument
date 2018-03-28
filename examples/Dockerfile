@@ -22,12 +22,6 @@ LABEL api.TEST.command=""\
       api.TEST.command.excludedOutput=""\
       api.TEST.command.excludedError=""
 
-LABEL api.TEST.fileExistence=""\
-      api.TEST.fileExistence.name="test"\
-      api.TEST.fileExistence.path="asdas"\
-      api.TEST.fileExistence.shouldExist="asd"\
-      api.TEST.fileExistence.permissions="asd"
-
 LABEL api.TEST.fileContent=""\
       api.TEST.fileContent.name="Debian Sources"\
       api.TEST.fileContent.path="/etc/apt/sources.list"\
@@ -62,9 +56,17 @@ LABEL api.ENV.OPENWEATHERMAP_APIKEY="" \
 ###  Desrbite ports exposed by this services and the protocl used
 LABEL api.EXPOSE.1337="" \
       api.EXPOSE.1337.scheme="tcp" \
-	api.EXPOSE.1337.protocol="http"\
+	  api.EXPOSE.1337.protocol="http"\
       api.EXPOSE.1337.about="The main endpoint of this service."
 
+# Add file and check it's contents
+LABEL api.TEST.fileExistence=""\
+      api.TEST.fileExistence.name="Dockumentation Check"\
+      api.TEST.fileExistence.path="/dockumentation.md"\
+      api.TEST.fileExistence.shouldExist="true"\
+      api.TEST.fileExistence.permissions=""
+
+ADD dockumentation.md /dockumentation.md
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 ENV GOPATH /go
 
