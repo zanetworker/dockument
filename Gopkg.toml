@@ -23,7 +23,7 @@
 
 [[constraint]]
   name = "github.com/docker/docker"
-  version = "1.13.1"
+  branch = "master"
 
 [[constraint]]
   name = "github.com/fatih/color"

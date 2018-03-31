@@ -22,21 +22,21 @@ Below are the ports the should be exposed by your application:
  
 Below are your container application dependencies:
 
-### Dependency rabbit
-
-- **Name**: rabbit
-- **Image**: rabbit:latest (`docker pull rabbit:latest`)
-- **About**: The rabbit
-- **Ports**: [5271]
-- **Mandatory**: true
-
-
 ### Dependency redis
 
 - **Name**: redis
 - **Image**: redis:latest (`docker pull redis:latest`)
 - **About**: For caching results from OWM API.
 - **Ports**: [6379]
+- **Mandatory**: true
+
+
+### Dependency rabbit
+
+- **Name**: rabbit
+- **Image**: rabbit:latest (`docker pull rabbit:latest`)
+- **About**: The rabbit
+- **Ports**: [5271]
 - **Mandatory**: true
 
 
@@ -53,7 +53,7 @@ Below are your container application dependencies:
  
  - **Command**: apt-get
  - **Args**: [-qqs, upgrade]
- - **Expected Output**: true
+ 
 
 
 
@@ -75,12 +75,12 @@ Below are your container application dependencies:
  
 Below are your container application dependencies:
 
-### File Existence Test test
+### File Existence Test Dockumentation Check
 
- - **Name**: test
- - **Path**: asdas 
- - **Should Exist**: asd
- - **With Permissions**: asd
+ - **Name**: Dockumentation Check
+ - **Path**: /dockumentation.md 
+ - **Should Exist**: true
+ 
 
 
 
@@ -91,7 +91,7 @@ Below are your container application dependencies:
 
 ### Meta Data Test
  - **Environment Variables**: foo:baz
- - **Exposed Ports**: 8080, 2345
+ - **Exposed Ports**: 8080,2345
  
  - **Cmd**: /bin/bash
  - **Workdir**: /app
@@ -116,8 +116,7 @@ Below are some important Environment Variables:
 
 
 ## Resources Required
-  
-  
+    
 Resources required by your container application to run with reasonable performance: 
 - **CPU**: 2
 - **Memory**: 3gb

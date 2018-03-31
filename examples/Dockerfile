@@ -17,10 +17,10 @@ LABEL api.TEST.command=""\
       api.TEST.command.name="apt-get upgrade"\
       api.TEST.command.command="apt-get"\
       api.TEST.command.args="-qqs, upgrade"\
-      api.TEST.command.expectedOutput="true"\
+      api.TEST.command.expectedOutput=""\
       api.TEST.command.expectedError=""\
-      api.TEST.command.excludedOutput=""\
-      api.TEST.command.excludedError=""
+      api.TEST.command.excludedOutput=".*Inst.*Security.* | .*Security.*Inst.*"\
+      api.TEST.command.excludedError=".*Inst.*Security.* | .*Security.*Inst.*"
 
 LABEL api.TEST.fileContent=""\
       api.TEST.fileContent.name="Debian Sources"\
@@ -30,7 +30,7 @@ LABEL api.TEST.fileContent=""\
 
 LABEL api.TEST.metadata=""\
       api.TEST.metadata.env="foo:baz"\
-      api.TEST.metadata.exposedPorts="8080, 2345"\
+      api.TEST.metadata.exposedPorts="8080,2345"\
       api.TEST.metadata.volumes="/test"\
       api.TEST.metadata.cmd="/bin/bash"\
       api.TEST.metadata.workdir="/app"
