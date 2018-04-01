@@ -2,7 +2,11 @@
 
 # DOCKument
 
-DOCKument is a tool that helps you a tool to auto-generate documentation for your Dockerfiles the way you would an API. Matthias Lübken gave an example on how to use "api" like labels to describe important information in the Dockerfile (e.g., resources used, exposed ports, dependencies, etc) [here](https://github.com/luebken/currentweather/blob/master/Dockerfile). This project makes use of the label patterns to fetch important data in Dockerfiles and create Dockumentation for it.
+DOCKument is a tool that helps you auto-generate documentation for your Dockerfiles and Docker images the way you would an API.
+
+Matthias Lübken gave an example on how to use "API" like labels to describe important information in the Dockerfile (e.g., resources used, exposed ports, dependencies, etc) [here](https://github.com/luebken/currentweather/blob/master/Dockerfile). This project makes use of similar label patterns to fetch important data in Dockerfiles / Docker images and create Dockumentation for it automagically. Furthermore, it improves on the work done by Matthias to expose various kinds of information that can be fetched from Docker images.
+
+
 
 Check the blog post [here](http://www.adelzaalouk.me/2018/dockument/)
 
@@ -177,8 +181,7 @@ See also the list of [contributors](https://github.com/zanetworker/dockument/gra
 
 ## TODO
 
-- [ ] Testing
-- [ ] Add support if requested for Image Dockumentation
+[ ] Testing
 
 ## License
 
