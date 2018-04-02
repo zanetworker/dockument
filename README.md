@@ -39,12 +39,12 @@ make OS=<darwin|linux|windows> dry
 
 [![asciicast](https://asciinema.org/a/pdVCkPpvz7OAdjYpuOz4gMY1j.png)](https://asciinema.org/a/pdVCkPpvz7OAdjYpuOz4gMY1j)
 
-With DOCKument you have the option to fetch important information about your Dockerfile direcly from the command line or create a markdown document that you can add to your git REPO. 
+With DOCKument you have the option to fetch important information about your Dockerfile or Docker Image direcly from the command line or create a markdown document that you can add to your git REPO.
 
 
 **Fetching Information from a Dockerfile or a Docker Image**
 
-For example, if you type `dockument deps --dockerfile "../examples/Dockerfile"`, you will get the following output:
+For example, if you type `dockument deps --dockerfile "../examples/Dockerfile"` or `dockument deps --image "repo/name:tag"`, you will get the following output:
 
 ```bash
 ### Dependency RABBIT ###
@@ -62,7 +62,7 @@ For example, if you type `dockument deps --dockerfile "../examples/Dockerfile"`,
 	Required: "true"
 ``` 
 
-On the other hand, to create a markdown DOCKument, you can use `dockument create --dockerfile "../examples/Dockerfile" -o "$HOME/dockumentation.md"`. The output will be a file similar to the one [here]("https://github.com/zanetworker/dockument/blob/master/examples/dockumentation.md")
+On the other hand, to create a markdown DOCKument, you can use `dockument create --dockerfile "../examples/Dockerfile" -o "$HOME/dockumentation.md"` or `dockument create --image "repo/name:tag" -o "$HOME/dockumentation.md"` . The output will be a file similar to the one [here]("https://github.com/zanetworker/dockument/blob/master/examples/dockumentation.md")
 
 **Creating a Dockumentation markdown to describe your image or Dockerfile** 
 
