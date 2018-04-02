@@ -37,7 +37,7 @@ make OS=<darwin|linux|windows> dry
 
 ### Usage
 
-[![asciicast](https://asciinema.org/a/wJZ4kxaFFDrx5iT9wxEiZ6ZyB.png)](https://asciinema.org/a/wJZ4kxaFFDrx5iT9wxEiZ6ZyB)
+[![asciicast](https://asciinema.org/a/pdVCkPpvz7OAdjYpuOz4gMY1j.png)](https://asciinema.org/a/pdVCkPpvz7OAdjYpuOz4gMY1j)
 
 With DOCKument you have the option to fetch important information about your Dockerfile direcly from the command line or create a markdown document that you can add to your git REPO. 
 
