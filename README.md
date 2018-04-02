@@ -41,6 +41,9 @@ make OS=<darwin|linux|windows> dry
 
 With DOCKument you have the option to fetch important information about your Dockerfile direcly from the command line or create a markdown document that you can add to your git REPO. 
 
+
+**Fetching Information from a Dockerfile or a Docker Image**
+
 For example, if you type `dockument deps --dockerfile "../examples/Dockerfile"`, you will get the following output:
 
 ```bash
@@ -60,6 +63,23 @@ For example, if you type `dockument deps --dockerfile "../examples/Dockerfile"`,
 ``` 
 
 On the other hand, to create a markdown DOCKument, you can use `dockument create --dockerfile "../examples/Dockerfile" -o "$HOME/dockumentation.md"`. The output will be a file similar to the one [here]("https://github.com/zanetworker/dockument/blob/master/examples/dockumentation.md")
+
+**Creating a Dockumentation markdown to describe your image or Dockerfile** 
+
+To create Dockumentation for a Dockerfile, you can simply type (as an example):
+
+```bash
+dockument create --dockerfile "examples/Dockerfile" -o "$HOME/dockumentation.md"
+```
+
+and for a Docker Image
+
+```bash
+dockument create -i "zanetworker/document:latests" -o "$HOME/dockumentation.md"
+```
+
+For more information, use `dockument help` to find out about the available commands.
+
 
 ### Pre-reqs
 
