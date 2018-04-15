@@ -1,6 +1,6 @@
-[![Build Status](http://e812a0e6.ngrok.io/api/badges/zanetworker/dockument/status.svg?branch=master)](http://http://e812a0e6.ngrok.io/api/badges/zanetworker/dockument/status.svg?branch=master)
-
 # DOCKument
+
+[![Build Status](http://zanetworkercicd.eu.ngrok.io/api/badges/zanetworker/dockument/status.svg?branch=master)](http://zanetworkercicd.eu.ngrok.io/api/badges/zanetworker/dockument/status.svg?branch=master)
 
 DOCKument is a tool that helps you auto-generate documentation for your Dockerfiles and Docker images the way you would an API.
 
