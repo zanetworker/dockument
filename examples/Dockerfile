@@ -52,6 +52,7 @@ LABEL api.DEPENDENCY.rabbit=""\
 LABEL api.ENV.OPENWEATHERMAP_APIKEY="" \
       api.ENV.OPENWEATHERMAP_APIKEY.about="Access key for OpenWeatherMap. See http://openweathermap.org/appid for details." \
       api.ENV.OPENWEATHERMAP_APIKEY.mandatory="true"
+ENV OPENWEATHERMAP_APIKEY 123456
 
 ###  Desrbite ports exposed by this services and the protocl used
 LABEL api.EXPOSE.1337="" \
@@ -65,8 +66,8 @@ LABEL api.TEST.fileExistence=""\
       api.TEST.fileExistence.path="/dockumentation.md"\
       api.TEST.fileExistence.shouldExist="true"\
       api.TEST.fileExistence.permissions=""
-
 ADD dockumentation.md /dockumentation.md
+
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 ENV GOPATH /go
 
