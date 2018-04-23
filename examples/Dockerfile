@@ -57,7 +57,7 @@ ENV OPENWEATHERMAP_APIKEY 123456
 ###  Desrbite ports exposed by this services and the protocl used
 LABEL api.EXPOSE.1337="" \
       api.EXPOSE.1337.scheme="tcp" \
-	  api.EXPOSE.1337.protocol="http"\
+      api.EXPOSE.1337.protocol="http"\
       api.EXPOSE.1337.about="The main endpoint of this service."
 
 # Add file and check it's contents
