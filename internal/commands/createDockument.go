@@ -48,6 +48,7 @@ func CreateDockument(dockerfile, dockumentPath string) {
 	if err != nil {
 		log.Errorf("failed to create a dockument, error: %s ", err.Error())
 	}
+	defer f.Close()
 
 	// Fetch dependencies
 	deps, err := labels.GetDepenedencies(dockerfile)
@@ -208,7 +209,10 @@ func CreateImageDockument(imageName, dockumentPath string) {
 		Others:             others,
 	}
 
-	tplDockument.ExecuteTemplate(f, "dockument", templateData)
+	err = tplDockument.ExecuteTemplate(f, "dockument", templateData)
+	if err != nil {
+		log.Fatalf("Can not execute template %s", err.Error())
+	}
 }
 
 //ValidPath is a helper function to assert validity of a file path
