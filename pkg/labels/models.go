@@ -84,6 +84,7 @@ type Port struct {
 //Ports that should be exposed by the container application
 type Ports []Port
 
+//TODO: make these three consistent with the above (for more consistency)
 //Resources is the exposed port object for the Dockerfile (only one resource object per dockerfile )
 type Resources struct {
 	CPU    string `json:"cpu,omitempty"`

@@ -99,6 +99,7 @@ func searchFileFor(search string, n *parser.Node, items map[string]string) map[s
 	return items
 }
 
+//TODO: refactor to add regexs at the begining
 func fetchLabelsFor(labelType string, labelMap map[string]string) (map[string]string, error) {
 	fetchedLabelsToReturn := map[string]string{}
 	for key, value := range labelMap {

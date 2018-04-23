@@ -52,7 +52,7 @@ func ImageExists(imageName string) bool {
 
 	d, err := dockerclient.NewEnvClient()
 	if err != nil {
-		log.Fatalf("Failed to create docker socket, error: %s", err.Error())
+		log.Errorf("Failed to create docker socket, error: %s", err.Error())
 	}
 
 	images, err := d.ImageList(ctx, types.ImageListOptions{All: false})
